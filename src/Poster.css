@@ -1,0 +1,15 @@
+/* .poster{
+  display: grid;
+
+} */
+img {
+  width: 20em;
+}
+
+figcaption {
+  background-color: black;
+  color: white;
+  font-size: 1.5em;
+  font-weight:bold;
+  position: absolute;
+}
