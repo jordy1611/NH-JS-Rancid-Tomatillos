@@ -1,0 +1,20 @@
+fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 75%;
+  align-self: center;
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+fieldset > button {
+  margin: auto;
+  width: 75%;
+}

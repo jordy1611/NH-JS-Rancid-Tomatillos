@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Posters.css';
 import Poster from './Poster.js'
 
