@@ -1,0 +1,18 @@
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 3em
+}
+
+h1{
+  font-size: 3em;
+  font-weight: bold;
+
+}
+
+.login-button{
+  margin-top: 3em;
+  width: 12em;
+  height: 3em;
+}

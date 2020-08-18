@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Posters from './Posters.js'
+import Header from './Header.js'
 import './App.css';
 import sampleMovies from './sampleMovies.js'
 
@@ -15,10 +16,7 @@ class App extends Component {
   render() {
     return(
     <main className="App">
-      <header>
-        <h1>Rotten Tomatillos</h1>
-        <button>Login/Logout</button>
-      </header>
+      <Header />
       <Posters posters={this.state.posters}/>
     </main>
   )};
