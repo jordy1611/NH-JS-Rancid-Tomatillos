@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import './Posters.css';
-
+import Poster from './Poster.js'
 
 const Posters = (props) => {
+  const posters = props.posters
   return (
-    <h2>TEST</h2>
+    <article className="poster-container">
+      {
+       posters.map(poster => {
+         return <Poster poster= { poster } key={poster.id}/>
+       })
+      }
+    </article>
+
   )
 }
 

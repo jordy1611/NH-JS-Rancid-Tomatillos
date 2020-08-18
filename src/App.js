@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Posters from './Posters.js'
 import './App.css';
+import sampleMovies from './sampleMovies.js'
 
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      posters: sampleMovies
+    };
   }
 
   render() {
@@ -16,7 +19,7 @@ class App extends Component {
         <h1>Rotten Tomatillos</h1>
         <button>Login/Logout</button>
       </header>
-      <Posters />
+      <Posters posters={this.state.posters}/>
     </main>
   )};
 }
