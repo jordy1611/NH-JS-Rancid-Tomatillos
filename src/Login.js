@@ -6,13 +6,34 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      email: '',
+      password: '',
+      id: 0
     };
   }
 
   updateText = (event) => {
     this.setState({[event.target.id]: event.target.value})
+  }
+
+  login = () => {
+    const emailInput = this.state.email;
+    const passwordInput = this.state.password;
+    const credentials = {
+      email: emailInput,
+      password: passwordInput
+    }
+
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(response => response.json())
+      .then(data => this.setState({id: data.user.id}))
+      .catch(error => console.error(error))
   }
 
   render(props) {
@@ -24,7 +45,7 @@ class Login extends Component {
             <label htmlFor="username">Username</label>
             <input 
               type="text" 
-              id="username"
+              id="email"
               onChange={this.updateText}
             />
           </p>
@@ -36,7 +57,7 @@ class Login extends Component {
               onChange={this.updateText}
             />
           </p>
-          <button>Log In</button>
+          <button onClick={this.login} type="button">Log In</button>
         </fieldset>
       </form>
     )

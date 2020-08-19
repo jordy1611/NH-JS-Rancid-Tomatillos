@@ -35,6 +35,22 @@ class App extends Component {
       .catch(error => console.error(error))
   }
 
+  login = (email, password) => {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error))
+  }
+
   componentDidMount() {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => response.json())
@@ -47,7 +63,7 @@ class App extends Component {
     <main className="App">
       <Header displayHomePage={this.displayHomePage} displayLoginPage = {this.displayLoginPage} view={this.state.view} />
       {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
-      {this.state.view === 'login' && <Login />}
+      {this.state.view === 'login' && <Login login={this.login}/>}
       {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo} />}
     </main>
   )};
