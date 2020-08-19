@@ -13,14 +13,14 @@ class Login extends Component {
         <fieldset>
           <legend>Log In</legend>
           <p>
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input 
               type="text" 
               id="username"
             />
           </p>
           <p>
-            <label for="password">Password</label>
+            <label htmlFor="username">Password</label>
             <input 
               type="password" 
               id="password" 

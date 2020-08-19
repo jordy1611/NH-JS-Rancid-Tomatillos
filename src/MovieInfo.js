@@ -9,8 +9,8 @@ const MovieInfo = (props) => {
       <h2>{movie.title}</h2>
       <p>Release date: {movie.release_date}</p>
       <p>Overview: {movie.overview}</p>
-      <ul>Genres: {movie.genres.map(genre => {
-        return <li>{genre}</li>
+      <ul>Genres: {movie.genres.map((genre, index) => {
+        return <li key={index}>{genre}</li>
       })}</ul>
       <p>Budget: {movie.budget}</p>
       <p>Runtime: {movie.runtime} days</p>
