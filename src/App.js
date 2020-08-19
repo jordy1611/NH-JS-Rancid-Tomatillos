@@ -11,8 +11,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      posters: sampleMovies
+      posters: []
     };
+  }
+
+  componentDidMount() {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+      .then(response => response.json())
+      .then(data => this.setState({posters: data.movies}))
+      .catch(error => console.error(error))
   }
 
   render() {
