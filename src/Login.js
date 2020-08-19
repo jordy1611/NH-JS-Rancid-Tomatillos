@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import Header from './Header.js'
 import './Login.css'
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: '',
       password: ''
@@ -14,7 +15,7 @@ class Login extends Component {
     this.setState({[event.target.id]: event.target.value})
   }
 
-  render() {
+  render(props) {
     return (
       <form>
         <fieldset>

@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       posters: [],
       view: 'home',
-      movieInfo: {}
+      movieInfo: {},
+      currentUserId: 0
     };
   }
 
@@ -44,10 +45,10 @@ class App extends Component {
   render() {
     return(
     <main className="App">
-      <Header displayLoginPage={this.displayLoginPage} displayHomePage={this.displayHomePage}/>
+      <Header displayHomePage={this.displayHomePage} displayLoginPage = {this.displayLoginPage} view={this.state.view} />
       {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
       {this.state.view === 'login' && <Login />}
-      {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo}/>}
+      {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo} />}
     </main>
   )};
 }
