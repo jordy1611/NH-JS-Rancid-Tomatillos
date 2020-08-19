@@ -12,7 +12,8 @@ class App extends Component {
     super();
     this.state = {
       posters: [],
-      view: 'home'
+      view: 'home',
+      movieInfo: {}
     };
   }
 
@@ -21,7 +22,16 @@ class App extends Component {
   }
 
   displayHomePage = () => {
-    this.setState({view: 'home'});
+    this.setState({view: 'home', movieInfo: {}});
+  }
+
+  displayMovieInfoPage = (event) => {
+    const id = event.target.id;
+    
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+      .then(response => response.json())
+      .then(data => this.setState({movieInfo: data.movie, view: 'movie'}))
+      .catch(error => console.error(error))
   }
 
   componentDidMount() {
@@ -35,32 +45,9 @@ class App extends Component {
     return(
     <main className="App">
       <Header displayLoginPage={this.displayLoginPage} displayHomePage={this.displayHomePage}/>
-      {this.state.view === 'home' &&
-        <Posters posters={this.state.posters}/>
-      }
-      {this.state.view === 'login' &&
-        <Login />
-      }
-      {/* <MovieInfo movie={
-          {
-            "movie": {
-              "id": 620,
-              "title": "Ghostbusters",
-              "poster_path": "https://image.tmdb.org/t/p/original//h5Qz8J4T8YQnbZzHXM73WVYYVPK.jpg",
-              "backdrop_path": "https://image.tmdb.org/t/p/original//c6yfABGVKuB5cjoOwdX4AJMlzUz.jpg",
-              "release_date": "1984-06-08",
-              "overview": "After losing their academic posts at a prestigious university, a team of parapsychologists goes into business as proton-pack-toting \"ghostbusters\" who exterminate ghouls, hobgoblins and supernatural pests of all stripes. An ad campaign pays off when a knockout cellist hires the squad to purge her swanky digs of demons that appear to be living in her refrigerator.",
-              "genres": ["Comedy",
-                "Fantasy"
-              ],
-              "budget": 30000000,
-              "revenue": 295212467,
-              "runtime": 107,
-              "tagline": "They ain't afraid of no ghost.",
-              "average_rating": 8
-            }
-          }
-      }/> */}
+      {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
+      {this.state.view === 'login' && <Login />}
+      {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo}/>}
     </main>
   )};
 }

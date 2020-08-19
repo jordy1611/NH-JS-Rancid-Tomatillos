@@ -8,7 +8,7 @@ const Posters = (props) => {
     <article className="poster-container">
       {
        posters.map(poster => {
-         return <Poster poster= { poster } key={poster.id}/>
+         return <Poster poster= { poster } key={poster.id} displayMovieInfoPage={props.displayMovieInfoPage}/>
        })
       }
     </article>
