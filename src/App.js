@@ -11,8 +11,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      posters: []
+      posters: [],
+      view: 'home'
     };
+  }
+
+  displayLoginPage = () => {
+    this.setState({view: 'login'});
+  }
+
+  displayHomePage = () => {
+    this.setState({view: 'home'});
   }
 
   componentDidMount() {
@@ -25,9 +34,13 @@ class App extends Component {
   render() {
     return(
     <main className="App">
-      <Header />
-      <Posters posters={this.state.posters}/>
-      <Login />
+      <Header displayLoginPage={this.displayLoginPage} displayHomePage={this.displayHomePage}/>
+      {this.state.view === 'home' &&
+        <Posters posters={this.state.posters}/>
+      }
+      {this.state.view === 'login' &&
+        <Login />
+      }
       {/* <MovieInfo movie={
           {
             "movie": {

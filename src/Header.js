@@ -1,11 +1,12 @@
 import React from 'react'
 import './Header.css'
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header>
       <h1>Rotten Tomatillos</h1>
-      <button className="login-button">Login/Logout</button>
+      <button onClick={props.displayHomePage}>Home</button>
+      <button onClick={props.displayLoginPage}>Login/Logout</button>
     </header>
   )
 }
