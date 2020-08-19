@@ -35,9 +35,8 @@ class Login extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(credentials)
-    })
-      .then(response => response.json())
-      .then(data => {this.props.updateCurrentUser(data.user.id)})
+    }).then(response => response.json())
+      .then(data => {this.props.updateCurrentUser(data.user)})
       .catch(error => {
         this.setState({error: error})
       })

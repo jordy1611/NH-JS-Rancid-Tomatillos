@@ -14,7 +14,7 @@ class App extends Component {
       posters: [],
       view: 'home',
       movieInfo: {},
-      currentUserId: 0
+      currentUser: {}
     };
   }
 
@@ -26,8 +26,8 @@ class App extends Component {
     this.setState({view: 'home', movieInfo: {}});
   }
 
-  updateCurrentUser = (id) => {
-    this.setState({currentUserId: id});
+  updateCurrentUser = (user) => {
+    this.setState({currentUser: user});
   }
 
   displayMovieInfoPage = (event) => {
