@@ -26,6 +26,10 @@ class App extends Component {
     this.setState({view: 'home', movieInfo: {}});
   }
 
+  updateCurrentUser = (id) => {
+    this.setState({currentUserId: id});
+  }
+
   displayMovieInfoPage = (event) => {
     const id = event.target.id;
     
@@ -33,22 +37,6 @@ class App extends Component {
       .then(response => response.json())
       .then(data => this.setState({movieInfo: data.movie, view: 'movie'}))
       .catch(error => console.error(error))
-  }
-
-  login = (email, password) => {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
-      })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error))
   }
 
   componentDidMount() {
@@ -63,7 +51,7 @@ class App extends Component {
     <main className="App">
       <Header displayHomePage={this.displayHomePage} displayLoginPage = {this.displayLoginPage} view={this.state.view} />
       {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
-      {this.state.view === 'login' && <Login login={this.login}/>}
+      {this.state.view === 'login' && <Login login={this.login} displayHomePage={this.displayHomePage} updateCurrentUser={this.updateCurrentUser}/>}
       {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo} />}
     </main>
   )};

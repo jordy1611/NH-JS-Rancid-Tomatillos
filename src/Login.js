@@ -3,12 +3,12 @@ import Header from './Header.js'
 import './Login.css'
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       email: '',
       password: '',
-      id: 0
+      error: ''
     };
   }
 
@@ -16,13 +16,18 @@ class Login extends Component {
     this.setState({[event.target.id]: event.target.value})
   }
 
-  login = () => {
+  generateCredentials = () => {
     const emailInput = this.state.email;
     const passwordInput = this.state.password;
-    const credentials = {
+
+    return {
       email: emailInput,
       password: passwordInput
     }
+  }
+
+  login = () => {
+    const credentials = this.generateCredentials();
 
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
       method: 'POST',
@@ -32,11 +37,13 @@ class Login extends Component {
       body: JSON.stringify(credentials)
     })
       .then(response => response.json())
-      .then(data => this.setState({id: data.user.id}))
-      .catch(error => console.error(error))
+      .then(data => {this.props.updateCurrentUser(data.user.id)})
+      .catch(error => {
+        this.setState({error: error})
+      })
   }
 
-  render(props) {
+  render() {
     return (
       <form>
         <fieldset>
@@ -59,6 +66,9 @@ class Login extends Component {
           </p>
           <button onClick={this.login} type="button">Log In</button>
         </fieldset>
+        {this.state.error &&
+          <p>Invalid Username/Password</p>
+        }
       </form>
     )
   }
