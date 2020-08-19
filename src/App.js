@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     return(
     <main className="App">
-      <Header displayHomePage={this.displayHomePage} displayLoginPage = {this.displayLoginPage} view={this.state.view} />
+      <Header displayHomePage={this.displayHomePage} displayLoginPage={this.displayLoginPage} view={this.state.view} currentUser={this.state.currentUser}/>
       {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
       {this.state.view === 'login' && <Login login={this.login} displayHomePage={this.displayHomePage} updateCurrentUser={this.updateCurrentUser}/>}
       {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo} />}
