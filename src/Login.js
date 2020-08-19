@@ -4,7 +4,14 @@ import './Login.css'
 class Login extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      username: '',
+      password: ''
+    };
+  }
+
+  updateText = (event) => {
+    this.setState({[event.target.id]: event.target.value})
   }
 
   render() {
@@ -17,13 +24,15 @@ class Login extends Component {
             <input 
               type="text" 
               id="username"
+              onChange={this.updateText}
             />
           </p>
           <p>
             <label htmlFor="username">Password</label>
             <input 
               type="password" 
-              id="password" 
+              id="password"
+              onChange={this.updateText}
             />
           </p>
           <button>Log In</button>
