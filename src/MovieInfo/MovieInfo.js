@@ -4,7 +4,7 @@ const MovieInfo = (props) => {
   const movie = props.movie;
 
   return (
-    <article>
+    <article className="movie-info">
       <img src={movie.backdrop_path} alt={`${movie.title} backdrop`}></img>
       <h2>{movie.title}</h2>
       <p data-testid='release date'>Release date: {movie.release_date}</p>
