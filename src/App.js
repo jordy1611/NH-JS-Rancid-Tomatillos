@@ -11,36 +11,52 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      posters: sampleMovies
+      posters: [],
+      view: 'home',
+      movieInfo: {},
+      currentUser: {}
     };
+  }
+
+  displayLoginPage = () => {
+    this.setState({view: 'login'});
+  }
+
+  displayHomePage = () => {
+    this.setState({view: 'home', movieInfo: {}});
+  }
+
+  updateCurrentUser = (user = {}) => {
+    this.setState({currentUser: user});
+  }
+
+  displayMovieInfoPage = (event) => {
+    const id = event.target.id;
+    
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+      .then(response => response.json())
+      .then(data => this.setState({movieInfo: data.movie, view: 'movie'}))
+      .catch(error => console.error(error))
+  }
+
+  logOut = () => {
+    this.setState({currentUser: {}})
+  }
+
+  componentDidMount() {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+      .then(response => response.json())
+      .then(data => this.setState({posters: data.movies}))
+      .catch(error => console.error(error))
   }
 
   render() {
     return(
     <main className="App">
-      <Header />
-      <Posters posters={this.state.posters}/>
-      <Login />
-      {/* <MovieInfo movie={
-          {
-            "movie": {
-              "id": 620,
-              "title": "Ghostbusters",
-              "poster_path": "https://image.tmdb.org/t/p/original//h5Qz8J4T8YQnbZzHXM73WVYYVPK.jpg",
-              "backdrop_path": "https://image.tmdb.org/t/p/original//c6yfABGVKuB5cjoOwdX4AJMlzUz.jpg",
-              "release_date": "1984-06-08",
-              "overview": "After losing their academic posts at a prestigious university, a team of parapsychologists goes into business as proton-pack-toting \"ghostbusters\" who exterminate ghouls, hobgoblins and supernatural pests of all stripes. An ad campaign pays off when a knockout cellist hires the squad to purge her swanky digs of demons that appear to be living in her refrigerator.",
-              "genres": ["Comedy",
-                "Fantasy"
-              ],
-              "budget": 30000000,
-              "revenue": 295212467,
-              "runtime": 107,
-              "tagline": "They ain't afraid of no ghost.",
-              "average_rating": 8
-            }
-          }
-      }/> */}
+      <Header displayHomePage={this.displayHomePage} displayLoginPage={this.displayLoginPage} view={this.state.view} currentUser={this.state.currentUser} logOut={this.logOut}/>
+      {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
+      {this.state.view === 'login' && <Login login={this.login} displayHomePage={this.displayHomePage} updateCurrentUser={this.updateCurrentUser}/>}
+      {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo} />}
     </main>
   )};
 }
