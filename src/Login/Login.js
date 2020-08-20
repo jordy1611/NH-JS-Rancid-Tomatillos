@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Header from './Header.js'
+import Header from '../Header/Header.js'
 import './Login.css'
 
 class Login extends Component {
@@ -57,16 +57,16 @@ class Login extends Component {
           <legend>Log In</legend>
           <p>
             <label htmlFor="username">Username</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               id="email"
               onChange={this.updateText}
             />
           </p>
           <p>
             <label htmlFor="username">Password</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               id="password"
               onChange={this.updateText}
             />

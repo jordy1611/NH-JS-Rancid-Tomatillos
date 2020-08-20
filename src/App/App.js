@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Posters from './Posters.js'
-import Header from './Header.js'
-import Login from './Login.js'
-import MovieInfo from './MovieInfo.js'
+import Posters from '../Posters/Posters.js'
+import Header from '../Header/Header.js'
+import Login from '../Login/Login.js'
+import MovieInfo from '../MovieInfo/MovieInfo.js'
 import './App.css';
-import sampleMovies from './sampleMovies.js'
+import sampleMovies from '../sampleMovies.js'
 
 
 class App extends Component {
@@ -32,7 +32,7 @@ class App extends Component {
 
   displayMovieInfoPage = (event) => {
     const id = event.target.id;
-    
+
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
       .then(response => response.json())
       .then(data => this.setState({movieInfo: data.movie, view: 'movie'}))
