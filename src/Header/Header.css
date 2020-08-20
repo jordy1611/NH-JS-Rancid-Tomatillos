@@ -9,18 +9,20 @@ header {
 h1{
   font-size: 3.5em;
   font-weight: bold;
-  color: #dbdbdb;
+  color: white;
   margin-top: .2em;
 }
 
 button{
   font-size: 1.6em;
   font-weight: bolder;
-  background-color: #dbdbdb;
+  color: white;
+  background-color: black;
   margin-left: 2em;
   margin-top: 1em;
   width: 9em;
   height: 2.2em;
-  border: solid black .2em;
+  border: solid .2em;
   border-radius: .15em;
+  opacity: .9;
 }
