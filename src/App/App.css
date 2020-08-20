@@ -1,6 +1,9 @@
 .App {
+  background-image: url('../assets/background.jpg');
   text-align: center;
 }
+
+/* background-image: url('../images/black-white-background-medium.jpg'); */
 
 .App-logo {
   height: 40vmin;

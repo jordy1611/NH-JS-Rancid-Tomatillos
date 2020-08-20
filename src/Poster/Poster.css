@@ -2,14 +2,21 @@
   display: grid;
 
 } */
+
+.poster{
+  margin-bottom: 5em;
+}
 img {
-  width: 20em;
+  width: 23em;
+  border: solid black .6em;
+  border-radius: .3em;
 }
 
 figcaption {
   background-color: black;
+  border-radius: .2em;
   color: white;
-  font-size: 1.5em;
-  font-weight:bold;
+  font-size: 2em;
+  font-weight: bold;
   position: absolute;
 }
