@@ -1,12 +1,11 @@
 import React from 'react'
 import './Posters.css';
-import Poster from './Poster.js'
-import Header from './Header.js'
+import Poster from '../Poster/Poster.js'
+import Header from '../Header/Header.js'
 
 const Posters = (props) => {
   const posters = props.posters
   return (
-    <main>
       <article className="poster-container">
         {
         posters.map(poster => {
@@ -14,8 +13,6 @@ const Posters = (props) => {
         })
         }
       </article>
-    </main>
-
   )
 }
 
