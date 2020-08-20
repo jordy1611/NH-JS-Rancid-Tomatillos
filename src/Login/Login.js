@@ -56,22 +56,24 @@ class Login extends Component {
         <fieldset>
           <legend>Log In</legend>
           <p>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
+              placeholder="email"
               type="text"
               id="email"
               onChange={this.updateText}
             />
           </p>
           <p>
-            <label htmlFor="username">Password</label>
+            <label htmlFor="password">Password</label>
             <input
+              placeholder="password"
               type="password"
               id="password"
               onChange={this.updateText}
             />
           </p>
-          <button onClick={this.login} type="button">Log In</button>
+          <button data-testid="login-button" onClick={this.login} type="button">Log In</button>
         </fieldset>
         {this.state.error &&
           <p>Invalid Username/Password</p>
