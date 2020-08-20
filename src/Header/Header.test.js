@@ -5,17 +5,6 @@ import '@testing-library/jest-dom';
 
 describe('Header', () => {
 
-  it('should be a header', () => {
-    render(<Header 
-      view={'home'}
-      currentUser={{}}
-    />)
-
-    const header = screen.getByRole('group');
-
-    expect(header).to.toBeInTheDocument();
-  })
-
   it('should only show the login button on the home page when no one is logged in', () => {
     render(<Header 
       view={'home'}
