@@ -2,17 +2,25 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 3em
+  padding: 0 3em;
+  height: 6em;
 }
 
 h1{
-  font-size: 3em;
+  font-size: 3.5em;
   font-weight: bold;
-
+  color: #dbdbdb;
+  margin-top: .2em;
 }
 
 button{
-  margin-top: 3em;
-  width: 12em;
-  height: 3em;
+  font-size: 1.6em;
+  font-weight: bolder;
+  background-color: #dbdbdb;
+  margin-left: 2em;
+  margin-top: 1em;
+  width: 9em;
+  height: 2.2em;
+  border: solid black .2em;
+  border-radius: .15em;
 }
