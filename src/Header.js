@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Header.css'
 
 const Header = (props) => {
+  console.log(props.currentUser)
   const userAttributes = Object.values(props.currentUser).length
 
   return (
@@ -11,7 +12,7 @@ const Header = (props) => {
         <button onClick={props.displayLoginPage}>Login</button>
       }
       {props.view === 'home' && userAttributes > 0 &&
-        <button onClick={props.displayLoginPage}>Log Out</button>
+        <button onClick={props.logOut}>Log Out</button>
       }
       {props.view === 'login' &&
         <button onClick={props.displayHomePage}>Home</button>

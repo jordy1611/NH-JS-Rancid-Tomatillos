@@ -26,7 +26,7 @@ class App extends Component {
     this.setState({view: 'home', movieInfo: {}});
   }
 
-  updateCurrentUser = (user) => {
+  updateCurrentUser = (user = {}) => {
     this.setState({currentUser: user});
   }
 
@@ -39,6 +39,10 @@ class App extends Component {
       .catch(error => console.error(error))
   }
 
+  logOut = () => {
+    this.setState({currentUser: {}})
+  }
+
   componentDidMount() {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => response.json())
@@ -49,7 +53,7 @@ class App extends Component {
   render() {
     return(
     <main className="App">
-      <Header displayHomePage={this.displayHomePage} displayLoginPage={this.displayLoginPage} view={this.state.view} currentUser={this.state.currentUser}/>
+      <Header displayHomePage={this.displayHomePage} displayLoginPage={this.displayLoginPage} view={this.state.view} currentUser={this.state.currentUser} logOut={this.logOut}/>
       {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
       {this.state.view === 'login' && <Login login={this.login} displayHomePage={this.displayHomePage} updateCurrentUser={this.updateCurrentUser}/>}
       {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo} />}

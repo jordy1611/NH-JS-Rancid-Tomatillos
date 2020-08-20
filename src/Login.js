@@ -38,7 +38,12 @@ class Login extends Component {
     }).then(response => response.json())
       .then(data => {
         this.props.updateCurrentUser(data.user)
-        this.props.displayHomePage();
+        if (data.user) {
+          this.props.displayHomePage();
+        } else {
+          this.setState({ error: 'Uh oh' });
+          console.log(this.state.error);
+        }
       })
       .catch(error => {
         this.setState({error: error})
