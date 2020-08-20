@@ -24,7 +24,7 @@ describe('Poster Component', () => {
 
     expect(rating).toBeInTheDocument()
     expect(image).toBeInTheDocument()
-  })
+  });
 
   it('should fire a function when the image or rating is clicked', () => {
     const mockDisplayMovieInfoPage = jest.fn()
@@ -35,8 +35,15 @@ describe('Poster Component', () => {
 
     fireEvent.click(image);
     fireEvent.click(rating);
-    
+
     expect(mockDisplayMovieInfoPage).toBeCalledTimes(2);
-    // expect(mockDisplayMovieInfoPage).toBeCalledWith(event)
-  })
+  });
+
+  it('should be returned as a single figure', () => {
+    render(< Poster poster= { poster } key={poster.id} displayMovieInfoPage={jest.fn()}/>)
+
+    const moviePoster = screen.getByRole('figure')
+
+    expect(moviePoster).toBeInTheDocument()
+  });
 })

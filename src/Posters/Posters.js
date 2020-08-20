@@ -6,7 +6,6 @@ import Header from '../Header/Header.js'
 const Posters = (props) => {
   const posters = props.posters
   return (
-    <main>
       <article className="poster-container">
         {
         posters.map(poster => {
@@ -14,8 +13,6 @@ const Posters = (props) => {
         })
         }
       </article>
-    </main>
-
   )
 }
 
