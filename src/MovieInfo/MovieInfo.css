@@ -1,9 +1,7 @@
 .movie-info{
-  /* background-color: green; */
   margin: 0;
   width: 100%;
   color: white;
-  /* border: none; */
 }
 
 .movie-info > * {
