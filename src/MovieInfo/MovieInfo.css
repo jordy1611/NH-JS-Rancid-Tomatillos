@@ -13,7 +13,8 @@
 
 .movie-info > img {
   margin: 0;
-  width: 75%;
+  margin-top: 2em;
+  width: 85%;
   border-width: .4em;
 }
 

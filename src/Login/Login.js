@@ -37,12 +37,11 @@ class Login extends Component {
       body: JSON.stringify(credentials)
     }).then(response => response.json())
       .then(data => {
-        this.props.updateCurrentUser(data.user)
         if (data.user) {
           this.props.displayHomePage();
+          this.props.updateCurrentUser(data.user)
         } else {
           this.setState({ error: 'Uh oh' });
-          console.log(this.state.error);
         }
       })
       .catch(error => {
@@ -73,7 +72,8 @@ class Login extends Component {
               onChange={this.updateText}
             />
           </p>
-          <button data-testid="login-button" onClick={this.login} type="button">Log In</button>
+          <button 
+            data-testid="login-button" onClick={this.login} type="button">Log In</button>
         </fieldset>
         {this.state.error &&
           <p>Invalid Username/Password</p>
