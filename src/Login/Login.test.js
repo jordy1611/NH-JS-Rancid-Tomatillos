@@ -13,7 +13,7 @@ describe('Login', () => {
     const userNameInput = screen.getByPlaceholderText('email')
     const passwordLabel = screen.getByText('Password')
     const passwordInput = screen.getByPlaceholderText('password')
-    const loginButton = screen.getByTestId('login-button')
+    const loginButton = screen.getByRole('button')
 
     expect(userNameLabel).toBeInTheDocument()
     expect(userNameInput).toBeInTheDocument()

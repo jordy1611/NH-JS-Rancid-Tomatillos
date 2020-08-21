@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 describe('Header', () => {
 
   it('should only show the login button on the home page when no one is logged in', () => {
-    render(<Header 
+    render(<Header
       view={'home'}
       currentUser={{}}
     />)
@@ -91,9 +91,9 @@ describe('Header', () => {
       view={'movie'}
       currentUser={{}}
     />)
-
-    const homeButton = screen.getByTestId('home');
-    const loginButton = screen.getByTestId('login');
+    
+    const homeButton = screen.getByRole('button', { name: 'Home'})
+    const loginButton = screen.getByRole('button', { name: 'Login'})
 
     expect(homeButton).toBeInTheDocument();
     expect(loginButton).toBeInTheDocument();
