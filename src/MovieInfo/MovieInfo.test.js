@@ -11,19 +11,23 @@ describe('MovieInfo', () => {
 
     const backdrop = screen.getByAltText('Akira backdrop');
     const heading = screen.getByRole('heading');
-    const releaseDate = screen.getByTestId('release date');
-    const overview = screen.getByTestId('overview');
-    const genres = screen.getByTestId('genres');
-    const budget = screen.getByTestId('budget');
-    const runtime = screen.getByTestId('runtime');
-    const tagline = screen.getByTestId('tagline');
-    const averageRating = screen.getByTestId('average rating');
-  
+    const releaseDate = screen.getByText(`Release Date: ${testMovie.release_date}`)
+    const overview = screen.getByText(`Overview: ${testMovie.overview}`)
+    const genres = screen.getByRole('list');
+    const genre1 = screen.getAllByRole('listitem')[0]
+    const genre2 = screen.getAllByRole('listitem')[1]
+    const budget = screen.getByText(`Budget: ${testMovie.budget}`)
+    const runtime = screen.getByText(`Runtime: ${testMovie.runtime} days`)
+    const tagline = screen.getByText(`Tagline: ${testMovie.tagline}`)
+    const averageRating = screen.getByText(`Average Rating: ${testMovie.average_rating}`)
+
     expect(backdrop).toBeInTheDocument();
     expect(heading).toBeInTheDocument();
     expect(releaseDate).toBeInTheDocument();
     expect(overview).toBeInTheDocument();
     expect(genres).toBeInTheDocument();
+    expect(genre1).toBeInTheDocument();
+    expect(genre2).toBeInTheDocument();
     expect(budget).toBeInTheDocument();
     expect(runtime).toBeInTheDocument();
     expect(tagline).toBeInTheDocument();
