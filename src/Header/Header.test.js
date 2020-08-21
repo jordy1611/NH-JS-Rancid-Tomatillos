@@ -5,6 +5,17 @@ import '@testing-library/jest-dom';
 
 describe('Header', () => {
 
+  it('should display the user\'s email when someone is logged in', () => {
+    render(<Header
+      view={'home'}
+      currentUser={{email: 'hello123@yahoo.com'}}
+    />)
+    
+    const userEmail = screen.getByText('hello123@yahoo.com');
+
+    expect(userEmail).toBeInTheDocument();
+  })
+
   it('should only show the login button on the home page when no one is logged in', () => {
     render(<Header
       view={'home'}

@@ -3,17 +3,17 @@ import './Header.css'
 
 const Header = (props) => {
   const userAttributes = Object.values(props.currentUser).length
-  const userDisplay = props.currentUser.name ? `user: ${props.currentUser.email}` : 'user: none'
-  console.log(userDisplay)
+  const userDisplay = props.currentUser.email;
+
   return (
     <header>
       <h1>Rancid Tomatillos</h1>
-
       {props.view === 'home' && userAttributes === 0 &&
         <button onClick={props.displayLoginPage}>Login</button>
       }
       {props.view === 'home' && userAttributes > 0 &&
         <button onClick={props.logOut}>Log Out</button>
+        
       }
       {props.view === 'login' &&
         <button onClick={props.displayHomePage}>Home</button>
@@ -24,7 +24,9 @@ const Header = (props) => {
           <button data-testid={'login'} onClick={props.displayLoginPage}>Login</button>
         </nav>
       }
-      <p>{userDisplay}</p>
+      {userAttributes > 0 && 
+        <p>{userDisplay}</p>
+      }
     </header>
   )
 }
