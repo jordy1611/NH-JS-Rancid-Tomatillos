@@ -1,0 +1,28 @@
+.movie-info{
+  /* background-color: green; */
+  margin: 0;
+  width: 100%;
+  color: white;
+  /* border: none; */
+}
+
+.movie-info > * {
+  margin: .4em 15% 0 15%;
+  font-size: 1.7em;
+  font-weight: bold;
+  width: 70%;
+}
+.movie-info > img {
+  margin: 0;
+  width: 75%;
+  border-width: .4em;
+}
+
+.movie-info > h2 {
+  font-size: 4em;
+}
+.movie-info > ul {
+  margin-left: 40%;
+  width: 15%;
+    text-align: center;
+}
