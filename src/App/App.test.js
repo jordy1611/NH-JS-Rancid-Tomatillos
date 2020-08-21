@@ -8,7 +8,7 @@ import { screen, fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 describe('App', () => {
-  it('should probs get tested', () => {
+  it('should exist', () => {
     
   })
 })
