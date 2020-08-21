@@ -1,4 +1,5 @@
 import React from 'react'
+import './MovieInfo.css'
 
 const MovieInfo = (props) => {
   const movie = props.movie;
@@ -7,7 +8,7 @@ const MovieInfo = (props) => {
     <article className="movie-info">
       <img src={movie.backdrop_path} alt={`${movie.title} backdrop`}></img>
       <h2>{movie.title}</h2>
-      <p data-testid='release date'>Release date: {movie.release_date}</p>
+      <p data-testid='release date'>Release Date: {movie.release_date}</p>
       <p data-testid='overview'>Overview: {movie.overview}</p>
       <ul data-testid='genres'>Genres: {movie.genres.map((genre, index) => {
         return <li key={index}>{genre}</li>
