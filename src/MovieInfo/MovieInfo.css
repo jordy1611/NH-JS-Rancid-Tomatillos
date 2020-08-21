@@ -1,9 +1,7 @@
 .movie-info{
-  /* background-color: green; */
   margin: 0;
   width: 100%;
   color: white;
-  /* border: none; */
 }
 
 .movie-info > * {
@@ -12,6 +10,7 @@
   font-weight: bold;
   width: 70%;
 }
+
 .movie-info > img {
   margin: 0;
   width: 75%;
@@ -21,6 +20,7 @@
 .movie-info > h2 {
   font-size: 4em;
 }
+
 .movie-info > ul {
   margin-left: 40%;
   width: 15%;
