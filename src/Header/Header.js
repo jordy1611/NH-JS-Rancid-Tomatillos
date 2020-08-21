@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Header.css'
 
 const Header = (props) => {
-  console.log(props.currentUser)
   const userAttributes = Object.values(props.currentUser).length
 
   return (
@@ -19,8 +18,8 @@ const Header = (props) => {
       }
       {props.view === 'movie' &&
         <nav>
-          <button onClick={props.displayHomePage}>Home</button>
-          <button onClick={props.displayLoginPage}>Login</button>
+          <button data-testid={'home'} onClick={props.displayHomePage}>Home</button>
+          <button data-testid={'login'} onClick={props.displayLoginPage}>Login</button>
         </nav>
       }
     </header>

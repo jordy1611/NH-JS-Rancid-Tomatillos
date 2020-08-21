@@ -4,8 +4,6 @@ import Header from '../Header/Header.js'
 import Login from '../Login/Login.js'
 import MovieInfo from '../MovieInfo/MovieInfo.js'
 import './App.css';
-import sampleMovies from '../sampleMovies.js'
-
 
 class App extends Component {
   constructor() {
@@ -53,10 +51,24 @@ class App extends Component {
   render() {
     return(
     <main className="App">
-      <Header displayHomePage={this.displayHomePage} displayLoginPage={this.displayLoginPage} view={this.state.view} currentUser={this.state.currentUser} logOut={this.logOut}/>
-      {this.state.view === 'home' && <Posters posters={this.state.posters} displayMovieInfoPage={this.displayMovieInfoPage} />}
-      {this.state.view === 'login' && <Login displayHomePage={this.displayHomePage} updateCurrentUser={this.updateCurrentUser}/>}
-      {this.state.view === 'movie' && <MovieInfo movie={this.state.movieInfo} />}
+      <Header 
+        displayHomePage={this.displayHomePage} 
+        displayLoginPage={this.displayLoginPage} 
+        view={this.state.view} 
+        currentUser={this.state.currentUser} 
+        logOut={this.logOut}
+      />
+      {this.state.view === 'home' && <Posters 
+        posters={this.state.posters} 
+        displayMovieInfoPage={this.displayMovieInfoPage} 
+      />}
+      {this.state.view === 'login' && <Login 
+        displayHomePage={this.displayHomePage} 
+        updateCurrentUser={this.updateCurrentUser}
+      />}
+      {this.state.view === 'movie' && <MovieInfo 
+        movie={this.state.movieInfo} 
+      />}
     </main>
   )};
 }
