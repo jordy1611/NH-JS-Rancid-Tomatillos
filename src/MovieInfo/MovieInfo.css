@@ -25,7 +25,7 @@
 .movie-info > ul {
   margin-left: 40%;
   width: 15%;
-    text-align: center;
+  text-align: center;
 }
 
 .movie-fieldset{
@@ -36,16 +36,6 @@
   opacity: .9;
   width: 50%;
   height: 2em;
-  /* display: flex;
-  flex-wrap: wrap;
-  flex-direction: row; */
-  /* align-items: center; */
-  /* justify-content: space-around;
-  /* max-width: 50%; */
-  /* font-size: 1em;
-  margin: 0; */
-  /* margin-left: 40em; */
-  /* align-self: center; */
 }
 
 fieldset > label {
