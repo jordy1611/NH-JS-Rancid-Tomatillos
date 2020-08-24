@@ -21,13 +21,15 @@ const dataFetcher = {
   },
 
   async submitUserRating(id, rating) {
-    const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`, {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(rating)
     })
+    .then((response) => response.json())
+    .then((response) => console.log('Successful post', response))
   }
 }
 
