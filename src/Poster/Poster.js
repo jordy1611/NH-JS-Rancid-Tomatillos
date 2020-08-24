@@ -3,7 +3,7 @@ import './Poster.css'
 
 const Poster = (props) => {
   const poster = props.poster;
-  const rating = parseInt(props.poster.average_rating)
+  const rating = parseInt(props.poster.average_rating);
 
   return (
     <figure className="poster" onClick={props.displayMovieInfoPage}>
