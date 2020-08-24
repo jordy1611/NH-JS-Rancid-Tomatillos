@@ -13,7 +13,8 @@ class App extends Component {
       posters: [],
       view: 'home',
       movieInfo: {},
-      currentUser: {}
+      currentUser: {},
+      userRatings: []
     };
   }
 
@@ -34,7 +35,20 @@ class App extends Component {
 
     try {
       const movie = await dataFetcher.getMovieById(id);
-      this.setState({ movieInfo: movie.movie, view: 'movie' });
+      this.setState({ movieInfo: movie, view: 'movie' });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  displayUserRatings = async () => {
+    try {
+      if (this.state.currentUser.id) {
+        const id = this.state.currentUser.id;
+        const ratings = await dataFetcher.getAllRatings(id);
+  
+        this.setState({ratings: ratings});
+      }
     } catch (error) {
       console.error(error);
     }
@@ -46,8 +60,8 @@ class App extends Component {
 
   componentDidMount = async () => {
     try {
-      const data = await dataFetcher.getAllMovies();
-      this.setState({ posters: data.movies });
+      const movies = await dataFetcher.getAllMovies();
+      this.setState({ posters: movies });
     } catch (error) {
       console.error(error);
     }
