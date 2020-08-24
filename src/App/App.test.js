@@ -6,15 +6,15 @@ import Posters from '../Posters/Posters.js';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
 import MovieInfo from '../MovieInfo/MovieInfo.js';
-import sampleMovies from '../sampleMovies.js';
+import sampleData from '../sampleData.js';
 import { screen, fireEvent, render, waitFor } from '@testing-library/react';
 import dataFetcher from '../dataFetcher.js';
 import '@testing-library/jest-dom';
 jest.mock('../dataFetcher.js');
 
 describe('App', () => {
-  it('display all movies when the page loads', async () => {
-    dataFetcher.getAllMovies.mockResolvedValueOnce(sampleMovies);
+  it('should display all movies when the page loads', async () => {
+    dataFetcher.getAllMovies.mockResolvedValueOnce(sampleData.movies);
 
     render(<App />);
 
@@ -30,4 +30,20 @@ describe('App', () => {
     expect(movie4).toBeInTheDocument();
     expect(movie5).toBeInTheDocument();
   })
+
+  it('should display a movie\'s information when its poster is clicked', async () => {
+    dataFetcher.getAllMovies.mockResolvedValueOnce(sampleData.movies);
+    dataFetcher.getMovieById.mockResolvedValueOnce(sampleData.movie);
+
+    render(<App />);
+
+    const akiraPoster = await waitFor(() => screen.getByAltText('Akira'));
+
+    fireEvent.click(akiraPoster);
+
+    const title = await waitFor(() => screen.getByText('Akira'));
+    
+    expect(title).toBeInTheDocument();
+  })
+
 })
