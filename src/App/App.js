@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Posters from '../Posters/Posters.js'
-import Header from '../Header/Header.js'
-import Login from '../Login/Login.js'
-import MovieInfo from '../MovieInfo/MovieInfo.js'
+import Posters from '../Posters/Posters.js';
+import Header from '../Header/Header.js';
+import Login from '../Login/Login.js';
+import MovieInfo from '../MovieInfo/MovieInfo.js';
+import dataFetcher from '../dataFetcher';
 import './App.css';
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
       posters: [],
       view: 'home',
       movieInfo: {},
-      currentUser: {}
+      currentUser: {},
+      userRatings: []
     };
   }
 
@@ -28,24 +30,41 @@ class App extends Component {
     this.setState({currentUser: user});
   }
 
-  displayMovieInfoPage = (event) => {
+  displayMovieInfoPage = async (event) => {
     const id = event.target.id;
 
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
-      .then(response => response.json())
-      .then(data => this.setState({movieInfo: data.movie, view: 'movie'}))
-      .catch(error => console.error(error))
+    try {
+      const movie = await dataFetcher.getMovieById(id);
+      this.setState({ movieInfo: movie, view: 'movie' });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  displayUserRatings = async () => {
+    try {
+      if (this.state.currentUser.id) {
+        const id = this.state.currentUser.id;
+        const ratings = await dataFetcher.getAllRatings(id);
+  
+        this.setState({ratings: ratings});
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   logOut = () => {
-    this.setState({currentUser: {}})
+    this.setState({currentUser: {}});
   }
 
-  componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => response.json())
-      .then(data => this.setState({posters: data.movies}))
-      .catch(error => console.error(error))
+  componentDidMount = async () => {
+    try {
+      const movies = await dataFetcher.getAllMovies();
+      this.setState({ posters: movies });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {
