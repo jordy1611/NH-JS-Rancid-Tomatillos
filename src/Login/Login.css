@@ -11,7 +11,7 @@ fieldset {
   opacity: .9;
   color: white;
   align-self: center;
-  height: 11em;
+  /* height: 11em; */
   width: 22em;
   display: flex;
   flex-direction: column;
