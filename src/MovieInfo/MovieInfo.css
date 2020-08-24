@@ -27,3 +27,39 @@
   width: 15%;
     text-align: center;
 }
+
+.movie-fieldset{
+  padding: 0;
+  background-color: black;
+  border: solid white .2em;
+  border-radius: .2em;
+  opacity: .9;
+  width: 50%;
+  height: 2em;
+  /* display: flex;
+  flex-wrap: wrap;
+  flex-direction: row; */
+  /* align-items: center; */
+  /* justify-content: space-around;
+  /* max-width: 50%; */
+  /* font-size: 1em;
+  margin: 0; */
+  /* margin-left: 40em; */
+  /* align-self: center; */
+}
+
+fieldset > label {
+  font-size: 1em;
+  margin-right: .2em;
+}
+
+fieldset > input {
+  width: 2em;
+  margin-bottom: .3em;
+}
+
+fieldset > button {
+  font-size: .7em;
+  margin: 0;
+  margin-left: 4em;
+}
