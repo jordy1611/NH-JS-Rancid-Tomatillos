@@ -86,6 +86,7 @@ class App extends Component {
       {this.state.view === 'home' && <Posters
         posters={this.state.posters}
         displayMovieInfoPage={this.displayMovieInfoPage}
+        userRatings={this.state.userRatings}
       />}
       {this.state.view === 'login' && <Login
         displayHomePage={this.displayHomePage}
