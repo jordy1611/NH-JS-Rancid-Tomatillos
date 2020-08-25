@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import Header from '../Header/Header.js'
-import './Login.css'
+import React, { Component } from 'react';
+import dataFetcher from '../dataFetcher';
+import './Login.css';
 
 class Login extends Component {
   constructor() {
@@ -26,27 +26,16 @@ class Login extends Component {
     }
   }
 
-  login = () => {
+  login = async () => {
     const credentials = this.generateCredentials();
+    const loginResponse = await dataFetcher.getLoginResponse(credentials);
 
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    }).then(response => response.json())
-      .then(data => {
-        if (data.user) {
-          this.props.displayHomePage();
-          this.props.updateCurrentUser(data.user)
-        } else {
-          this.setState({ error: 'Uh oh' });
-        }
-      })
-      .catch(error => {
-        this.setState({error: error})
-      })
+    if (loginResponse.user) {
+      this.props.displayHomePage();
+      this.props.updateCurrentUser(loginResponse.user);
+    } else {
+      this.setState({error: 'uh oh'});
+    }
   }
 
   render() {

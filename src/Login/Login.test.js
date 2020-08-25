@@ -1,7 +1,10 @@
 import React from 'react';
-import Login from '../Login/Login.js'
-import { screen, render } from '@testing-library/react';
+import Login from '../Login/Login.js';
+import dataFetcher from '../dataFetcher.js';
+import sampleData from '../sampleData.js';
+import { screen, render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
+jest.mock('../dataFetcher.js');
 
 describe('Login', () => {
 
@@ -21,17 +24,18 @@ describe('Login', () => {
     expect(loginButton).toBeInTheDocument()
   })
 
-  it('should fire 3 functions when the login button is clicked', () => {
-    // login being passed into login from app is actually never used, need to remove prop
-    // login uses its own login mathod which has some fetching going on
+  // it('should log the user in when the user\'s credentials are correct', () => {
+  //   dataFetcher.getLoginResponse.mockResolvedValueOnce(sampleData.loginResponse);
+  //   const mockDisplayHomePage = jest.fn();
+  //   const mockUpdateCurrentUser = jest.fn();
 
-    // const mockLogin = jest.fn(), mockDisplayHomePage = jest.fn(), mockUpdateCurrentUser = jest.fn();
-    // render(<Login login={mockLogin} displayHomePage={mockDisplayHomePage} updateCurrentUser={mockUpdateCurrentUser}/>)
-    // //
-    // const loginButton = screen.getByTestId('login-button')
-    // //
-    // fireEvent.click(loginButton)
-    //
-    // expect(fmockLogin).toBeCalledTimes(1)
-  })
+  //   render(<Login displayHomePage={mockDisplayHomePage} updateCurrentUser={mockUpdateCurrentUser} />);
+
+  //   const loginButton = screen.getByRole('button');
+
+  //   fireEvent.click(loginButton);
+
+  //   expect(mockUpdateCurrentUser).toHaveBeenCalledTimes(1);
+  //   expect(mockDisplayHomePage).toHaveBeenCalledTimes(1);
+  // })
 })
