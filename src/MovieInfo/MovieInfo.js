@@ -3,11 +3,20 @@ import './MovieInfo.css'
 
 const MovieInfo = (props) => {
   const movie = props.movie;
+  let rating = movie.average_rating;
   const preventDefault = (e) => {
     e.preventDefault()
   }
+
   const resetInput = (e) => {
     e.target.value = ''
+  }
+  const createRating = (e) => {
+    rating = e.target.value
+  }
+
+  const rateMovie = () => {
+    props.submitRating(69)
   }
 
   return (
@@ -26,7 +35,7 @@ const MovieInfo = (props) => {
       <form className="user-rating-form">
         <fieldset className="movie-fieldset">
           <label htmlFor="rating-input">Your Rating:</label>
-          <input id="rating-input" list="numbers" min='0' max='10' onKeyDown={preventDefault} onClick={resetInput}></input>
+          <input id="rating-input" list="numbers" min='0' max='10' onKeyDown={preventDefault} onClick={resetInput} onChange={createRating}></input>
           <datalist id="numbers">
             <option value="1"></option>
             <option value="2"></option>
@@ -39,7 +48,7 @@ const MovieInfo = (props) => {
             <option value="9"></option>
             <option value="10"></option>
           </datalist>
-          <button type="button">Submit</button>
+          <button type="button" onClick={rateMovie}>Submit</button>
         </fieldset>
       </form>
     </article>

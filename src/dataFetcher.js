@@ -20,8 +20,8 @@ const dataFetcher = {
     return data.ratings;
   },
 
-  async submitUserRating(id, rating) {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`, {
+  async submitUserRating(rating) {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${rating.user_id}/ratings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
