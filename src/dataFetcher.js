@@ -29,7 +29,7 @@ const dataFetcher = {
       body: JSON.stringify(rating)
     })
     .then((response) => response.json())
-    .then((response) => console.log('Successful post', response)) 
+    .then((response) => console.log('Successful post', response))
   },
 
   getLoginResponse(credentials) {
@@ -44,6 +44,15 @@ const dataFetcher = {
         return data
       })
       .catch(error => console.error(error))
+  },
+
+  deleteUserRating(rating) {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${rating.user_id}/ratings/${rating.id}`, {
+      method: 'DELETE',
+    })
+    .then((response) => response.json())
+    .then((response) => console.log('Successful deleteUserRating', response))
+    .catch((error) => console.error(error))
   }
 }
 
