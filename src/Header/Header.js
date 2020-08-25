@@ -18,10 +18,16 @@ const Header = (props) => {
       {props.view === 'login' &&
         <button onClick={props.displayHomePage}>Home</button>
       }
-      {props.view === 'movie' &&
+      {props.view === 'movie' && userAttributes === 0 &&
         <nav>
           <button data-testid={'home'} onClick={props.displayHomePage}>Home</button>
           <button data-testid={'login'} onClick={props.displayLoginPage}>Login</button>
+        </nav>
+      }
+      {props.view === 'movie' && userAttributes > 0 &&
+        <nav>
+          <button data-testid={'home'} onClick={props.displayHomePage}>Home</button>
+          <button onClick={props.logOut}>Log Out</button>
         </nav>
       }
       {userAttributes > 0 && 
