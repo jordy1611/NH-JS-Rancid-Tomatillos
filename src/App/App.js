@@ -41,18 +41,20 @@ class App extends Component {
     }
   }
 
-  submitRating = (userRating) => {
+  submitRating = async (userRating) => {
     const rating = {user_id: this.state.currentUser.id, movie_id: this.state.movieInfo.id, rating: userRating || this.state.movieInfo.average_rating}
-    console.log('app submit rating', rating)
-    dataFetcher.submitUserRating(rating)
-    .then(() => {console.log('success')})
+    await dataFetcher.submitUserRating(rating);
+
+    this.displayUserRatings();
   }
 
   displayUserRatings = async () => {
     try {
       if (this.state.currentUser.id) {
+        this.setState({ userRatings: [] });
         const id = this.state.currentUser.id;
         const ratings = await dataFetcher.getAllRatings(id);
+
         this.setState({ userRatings: ratings });
       }
     } catch (error) {

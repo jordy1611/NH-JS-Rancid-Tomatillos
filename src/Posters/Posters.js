@@ -17,9 +17,7 @@ const Posters = (props) => {
         return <Poster 
           poster= { poster } 
           key={ poster.id } 
-          userRating={
-            ratingMatch ? ratingMatch.rating : ''
-          } 
+          userRating={ ratingMatch } 
           displayMovieInfoPage={ props.displayMovieInfoPage }
         />
       })
