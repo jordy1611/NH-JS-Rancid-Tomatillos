@@ -48,10 +48,9 @@ const dataFetcher = {
 
   deleteUserRating(rating) {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${rating.user_id}/ratings/${rating.id}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     })
-    .then((response) => response.json())
-    .then((response) => console.log('Successful deleteUserRating', response))
+    .then(() => console.log('Successful rating deletion'))
     .catch((error) => console.error(error))
   }
 }
