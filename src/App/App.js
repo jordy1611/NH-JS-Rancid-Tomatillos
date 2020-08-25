@@ -92,6 +92,7 @@ class App extends Component {
       {this.state.view === 'movie' && <MovieInfo
         movie={this.state.movieInfo}
         submitRating={this.submitRating}
+        isCurrentUser={this.state.currentUser.id ? true : false}
       />}
     </main>
   )};
