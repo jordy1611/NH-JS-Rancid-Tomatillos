@@ -29,10 +29,18 @@ class MovieInfo extends Component {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
       console.log(this.state.rated)
       this.props.submitRating(this.state.userRating)
+      this.setState( {isRated: true })
     } else {
       console.log('whoops')
     }
   }
+
+  deleteRating = () => {
+    this.props.deleteRating()
+    this.setState( {isRated: false} )
+    this.props.displayUserRatings()
+  }
+
   render() {
     return (
       <article className="movie-info">
@@ -69,7 +77,7 @@ class MovieInfo extends Component {
         </form>
       }
       {this.state.isCurrentUser && this.state.isRated &&
-        <button>Delete</button>
+        <button onClick={this.deleteRating}>Delete</button>
       }
       </article>
     )
