@@ -41,7 +41,7 @@ class Login extends Component {
   render() {
     return (
       <form>
-        <fieldset>
+        <fieldset className="login-fieldset">
           <legend>Log In</legend>
           <p>
             <label htmlFor="email">Email</label>

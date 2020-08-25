@@ -25,5 +25,31 @@
 .movie-info > ul {
   margin-left: 40%;
   width: 15%;
-    text-align: center;
+  text-align: center;
+}
+
+.movie-fieldset{
+  padding: 0;
+  background-color: black;
+  border: solid white .2em;
+  border-radius: .2em;
+  opacity: .9;
+  width: 50%;
+  height: 2em;
+}
+
+fieldset > label {
+  font-size: 1em;
+  margin-right: .2em;
+}
+
+fieldset > input {
+  width: 2em;
+  margin-bottom: .3em;
+}
+
+fieldset > button {
+  font-size: .7em;
+  margin: 0;
+  margin-left: 4em;
 }

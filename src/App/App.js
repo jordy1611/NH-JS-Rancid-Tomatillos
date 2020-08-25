@@ -41,12 +41,18 @@ class App extends Component {
     }
   }
 
+  submitRating = (userRating) => {
+    const rating = {user_id: this.state.currentUser.id, movie_id: this.state.movieInfo.id, rating: userRating || this.state.movieInfo.average_rating}
+    console.log('app submit rating', rating)
+    dataFetcher.submitUserRating(rating)
+    .then(() => {console.log('success')})
+  }
+
   displayUserRatings = async () => {
     try {
       if (this.state.currentUser.id) {
         const id = this.state.currentUser.id;
         const ratings = await dataFetcher.getAllRatings(id);
-  
         this.setState({ratings: ratings});
       }
     } catch (error) {
@@ -70,23 +76,25 @@ class App extends Component {
   render() {
     return(
     <main className="App">
-      <Header 
-        displayHomePage={this.displayHomePage} 
-        displayLoginPage={this.displayLoginPage} 
-        view={this.state.view} 
-        currentUser={this.state.currentUser} 
+      <Header
+        displayHomePage={this.displayHomePage}
+        displayLoginPage={this.displayLoginPage}
+        view={this.state.view}
+        currentUser={this.state.currentUser}
         logOut={this.logOut}
       />
-      {this.state.view === 'home' && <Posters 
-        posters={this.state.posters} 
-        displayMovieInfoPage={this.displayMovieInfoPage} 
+      {this.state.view === 'home' && <Posters
+        posters={this.state.posters}
+        displayMovieInfoPage={this.displayMovieInfoPage}
       />}
-      {this.state.view === 'login' && <Login 
-        displayHomePage={this.displayHomePage} 
+      {this.state.view === 'login' && <Login
+        displayHomePage={this.displayHomePage}
         updateCurrentUser={this.updateCurrentUser}
       />}
-      {this.state.view === 'movie' && <MovieInfo 
-        movie={this.state.movieInfo} 
+      {this.state.view === 'movie' && <MovieInfo
+        movie={this.state.movieInfo}
+        submitRating={this.submitRating}
+        isCurrentUser={this.state.currentUser.id ? true : false}
       />}
     </main>
   )};
