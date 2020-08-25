@@ -33,6 +33,7 @@ class Login extends Component {
     if (loginResponse.user) {
       this.props.displayHomePage();
       this.props.updateCurrentUser(loginResponse.user);
+      this.props.displayUserRatings();
     } else {
       this.setState({error: 'uh oh'});
     }

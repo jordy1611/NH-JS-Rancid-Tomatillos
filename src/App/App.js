@@ -53,7 +53,7 @@ class App extends Component {
       if (this.state.currentUser.id) {
         const id = this.state.currentUser.id;
         const ratings = await dataFetcher.getAllRatings(id);
-        this.setState({ratings: ratings});
+        this.setState({ userRatings: ratings });
       }
     } catch (error) {
       console.error(error);
@@ -90,6 +90,7 @@ class App extends Component {
       {this.state.view === 'login' && <Login
         displayHomePage={this.displayHomePage}
         updateCurrentUser={this.updateCurrentUser}
+        displayUserRatings={this.displayUserRatings}
       />}
       {this.state.view === 'movie' && <MovieInfo
         movie={this.state.movieInfo}
