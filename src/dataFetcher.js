@@ -18,6 +18,20 @@ const dataFetcher = {
     const data = await response.json();
 
     return data.ratings; 
+  },
+
+  getLoginResponse(credentials) {
+    return fetch("https://rancid-tomatillos.herokuapp.com/api/v2/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    }).then(response => response.json())
+      .then(data => {
+        return data
+      })
+      .catch(error => console.error(error))
   }
 }
 
