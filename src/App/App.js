@@ -75,6 +75,11 @@ class App extends Component {
     }
   }
 
+  isMovieRated = () => {
+  return this.state.userRatings.some(rating => rating.movie_id === this.state.movieInfo.id)
+
+  }
+
   render() {
     return(
     <main className="App">
@@ -99,6 +104,7 @@ class App extends Component {
         movie={this.state.movieInfo}
         submitRating={this.submitRating}
         isCurrentUser={this.state.currentUser.id ? true : false}
+        isRated={this.isMovieRated()}
       />}
     </main>
   )};

@@ -6,7 +6,7 @@ class MovieInfo extends Component {
     super(props);
     this.state = {
       movie: props.movie,
-      rated: false,
+      isRated: props.isRated,
       userRating: 0,
       isCurrentUser: props.isCurrentUser
     }
@@ -47,7 +47,7 @@ class MovieInfo extends Component {
         <p data-testid='runtime'>Runtime: {this.state.movie.runtime} days</p>
         <p data-testid='tagline'>Tagline: {this.state.movie.tagline}</p>
         <p data-testid='average rating'>Average Rating: {this.state.movie.average_rating.toFixed(1)}</p>
-        {this.state.isCurrentUser &&
+        {this.state.isCurrentUser && !this.state.isRated &&
         <form className="user-rating-form">
           <fieldset className="movie-fieldset">
             <label htmlFor="rating-input">Your Rating:</label>
@@ -67,6 +67,9 @@ class MovieInfo extends Component {
             <button type="button" onClick={this.rateMovie}>Submit</button>
           </fieldset>
         </form>
+      }
+      {this.state.isCurrentUser && this.state.isRated &&
+        <button>Delete</button>
       }
       </article>
     )
