@@ -21,6 +21,7 @@ const dataFetcher = {
   },
 
   async submitUserRating(rating) {
+    console.log('id', rating.user_id)
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${rating.user_id}/ratings`, {
       method: 'POST',
       headers: {

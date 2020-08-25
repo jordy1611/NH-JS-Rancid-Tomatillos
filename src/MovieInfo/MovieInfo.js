@@ -22,7 +22,7 @@ class MovieInfo extends Component {
   }
 
   createRating = (e) => {
-    this.setState({userRating: e.target.value})
+    this.setState({userRating: parseInt(e.target.value)})
   }
 
   rateMovie = (props) => {

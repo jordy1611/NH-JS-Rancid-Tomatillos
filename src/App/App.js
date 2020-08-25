@@ -42,8 +42,10 @@ class App extends Component {
   }
 
   submitRating = (userRating) => {
-    const rating = {rating: {user_id: this.state.currentUser.id, movie_id: this.state.movieInfo.id, rating: userRating || this.state.movieInfo.average_rating}}
+    const rating = {user_id: this.state.currentUser.id, movie_id: this.state.movieInfo.id, rating: userRating || this.state.movieInfo.average_rating}
     console.log('app submit rating', rating)
+    dataFetcher.submitUserRating(rating)
+    .then(() => {console.log('success')})
   }
 
   displayUserRatings = async () => {
