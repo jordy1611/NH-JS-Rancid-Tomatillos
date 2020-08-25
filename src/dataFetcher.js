@@ -20,19 +20,18 @@ const dataFetcher = {
     return data.ratings; 
   },
 
-  async getLoginResponse(credentials) {
-    const response = await fetch(
-      fetch("https://rancid-tomatillos.herokuapp.com/api/v2/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
+  getLoginResponse(credentials) {
+    return fetch("https://rancid-tomatillos.herokuapp.com/api/v2/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    }).then(response => response.json())
+      .then(data => {
+        return data
       })
-    );
-    const data = response.json();
-
-    return data;
+      .catch(error => console.error(error))
   }
 }
 

@@ -55,6 +55,13 @@ const sampleData = {
     "runtime": 124,
     "tagline": "Neo-Tokyo is about to E.X.P.L.O.D.E.",
     "average_rating": 6
+  },
+  loginResponse: {
+    user: {
+      name: 'Sam',
+      email: '123@yahoo.com',
+      id: '2'
+    }
   }
 }
 

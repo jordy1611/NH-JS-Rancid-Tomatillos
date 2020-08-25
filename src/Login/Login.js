@@ -28,7 +28,7 @@ class Login extends Component {
 
   login = async () => {
     const credentials = this.generateCredentials();
-    const loginResponse = dataFetcher.getLoginResponse(credentials);
+    const loginResponse = await dataFetcher.getLoginResponse(credentials);
 
     if (loginResponse.user) {
       this.props.displayHomePage();
