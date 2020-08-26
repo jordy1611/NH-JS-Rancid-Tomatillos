@@ -34,15 +34,12 @@ class MovieInfo extends Component {
     }
   }
 
-<<<<<<< HEAD
-=======
   deleteRating = () => {
     this.props.deleteRating()
     this.setState( {isRated: false} )
     this.props.displayUserRatings()
   }
 
->>>>>>> master
   render() {
     return (
       <article className="movie-info">
