@@ -19,4 +19,8 @@ figcaption {
   font-size: 2em;
   font-weight: bold;
   position: absolute;
+  max-height: 3em;
+}
+figcaption > p {
+  margin: 0;
 }

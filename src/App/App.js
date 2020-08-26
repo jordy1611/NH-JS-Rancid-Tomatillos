@@ -24,6 +24,7 @@ class App extends Component {
 
   displayHomePage = () => {
     this.setState({view: 'home', movieInfo: {}});
+    this.displayUserRatings()
   }
 
   updateCurrentUser = (user = {}) => {
@@ -32,7 +33,6 @@ class App extends Component {
 
   displayMovieInfoPage = async (event) => {
     const id = event.target.id;
-
     try {
       const movie = await dataFetcher.getMovieById(id);
       this.setState({ movieInfo: movie, view: 'movie' });
@@ -44,7 +44,6 @@ class App extends Component {
   submitRating = async (userRating) => {
     const rating = {user_id: this.state.currentUser.id, movie_id: this.state.movieInfo.id, rating: userRating || this.state.movieInfo.average_rating}
     await dataFetcher.submitUserRating(rating);
-
     this.displayUserRatings();
   }
 
@@ -54,7 +53,6 @@ class App extends Component {
         this.setState({ userRatings: [] });
         const id = this.state.currentUser.id;
         const ratings = await dataFetcher.getAllRatings(id);
-
         this.setState({ userRatings: ratings });
       }
     } catch (error) {
@@ -63,7 +61,7 @@ class App extends Component {
   }
 
   logOut = () => {
-    this.setState({currentUser: {}});
+    this.setState({view: 'home', currentUser: {}, userRatings: []});
   }
 
   componentDidMount = async () => {
@@ -73,6 +71,24 @@ class App extends Component {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  isMovieRated = () => {
+    if(this.state.userRatings.length > 0) {
+      return this.state.userRatings.some(rating => rating.movie_id === this.state.movieInfo.id)
+    }
+  }
+
+  deleteRating = async () => {
+    const ratingToDelete = this.state.userRatings.find(rating => rating.movie_id === this.state.movieInfo.id)
+    if (ratingToDelete) {
+      await dataFetcher.deleteUserRating(ratingToDelete)
+      this.displayUserRatings()
+    }
+  }
+
+  isCurrentUser = () => {
+    return (this.state.currentUser.id) ? true : false
   }
 
   render() {
@@ -98,7 +114,10 @@ class App extends Component {
       {this.state.view === 'movie' && <MovieInfo
         movie={this.state.movieInfo}
         submitRating={this.submitRating}
-        isCurrentUser={this.state.currentUser.id ? true : false}
+        isCurrentUser={this.isCurrentUser()}
+        isRated={this.isMovieRated()}
+        deleteRating={this.deleteRating}
+        displayUserRatings={this.displayUserRatings}
       />}
     </main>
   )};

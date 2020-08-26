@@ -9,10 +9,12 @@ const Poster = (props) => {
 
   return (
     <figure className="poster" onClick={props.displayMovieInfoPage}>
-      <figcaption id={poster.id}>{averageRating}</figcaption>
-      {userRating && 
-        <p>{userRating.rating}</p>
-      }
+      <figcaption id={poster.id}>
+        {averageRating}
+        {userRating &&
+          <p>{userRating.rating}</p>
+        }
+      </figcaption>
       <img src={poster.poster_path} alt={poster.title} id={poster.id}/>
     </figure>
   )
