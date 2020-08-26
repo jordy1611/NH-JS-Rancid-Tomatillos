@@ -94,16 +94,20 @@ class App extends Component {
               userRatings={this.state.userRatings}
             />}
           }/>
-          {this.state.view === 'login' && <Login
-            displayHomePage={this.displayHomePage}
-            updateCurrentUser={this.updateCurrentUser}
-            displayUserRatings={this.displayUserRatings}
-          />}
-          {this.state.view === 'movie' && <MovieInfo
-            movie={this.state.movieInfo}
-            submitRating={this.submitRating}
-            isCurrentUser={this.state.currentUser.id ? true : false}
-          />}
+          <Route exact path='/login' render={() => {
+            return <Login
+              displayHomePage={this.displayHomePage}
+              updateCurrentUser={this.updateCurrentUser}
+              displayUserRatings={this.displayUserRatings}
+            />}
+          }/>
+          <Route path='/movie/:id' render={() => {
+            return <MovieInfo
+              movie={this.state.movieInfo}
+              submitRating={this.submitRating}
+              isCurrentUser={this.state.currentUser.id ? true : false}
+            />}
+          }/>
         </main>
       </Router>
   )};
