@@ -6,7 +6,7 @@ class MovieInfo extends Component {
     super(props);
     this.state = {
       movie: props.movie,
-      rated: false,
+      isRated: props.isRated,
       userRating: 0,
       isCurrentUser: props.isCurrentUser
     }
@@ -28,11 +28,21 @@ class MovieInfo extends Component {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
       console.log(this.state.rated)
       this.props.submitRating(this.state.userRating)
+      this.setState( {isRated: true })
     } else {
       console.log('whoops')
     }
   }
 
+<<<<<<< HEAD
+=======
+  deleteRating = () => {
+    this.props.deleteRating()
+    this.setState( {isRated: false} )
+    this.props.displayUserRatings()
+  }
+
+>>>>>>> master
   render() {
     return (
       <article className="movie-info">
@@ -47,7 +57,7 @@ class MovieInfo extends Component {
         <p data-testid='runtime'>Runtime: {this.state.movie.runtime} days</p>
         <p data-testid='tagline'>Tagline: {this.state.movie.tagline}</p>
         <p data-testid='average rating'>Average Rating: {this.state.movie.average_rating.toFixed(1)}</p>
-        {this.state.isCurrentUser &&
+        {this.state.isCurrentUser && !this.state.isRated &&
         <form className="user-rating-form">
           <fieldset className="movie-fieldset">
             <label htmlFor="rating-input">Your Rating:</label>
@@ -67,6 +77,9 @@ class MovieInfo extends Component {
             <button type="button" onClick={this.rateMovie}>Submit</button>
           </fieldset>
         </form>
+      }
+      {this.state.isCurrentUser && this.state.isRated &&
+        <button onClick={this.deleteRating}>Delete</button>
       }
       </article>
     )

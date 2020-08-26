@@ -9,6 +9,7 @@ const Poster = (props) => {
   const rating = `${averageRating}`
 
   return (
+<<<<<<< HEAD
     <Link to={`/movies/${poster.id}`}>
       <figure className="poster" onClick={props.displayMovieInfoPage}>
         <figcaption id={poster.id}>{averageRating}</figcaption>
@@ -17,6 +18,18 @@ const Poster = (props) => {
       </figure>
     </Link>
   );
+=======
+    <figure className="poster" onClick={props.displayMovieInfoPage}>
+      <figcaption id={poster.id}>
+        {averageRating}
+        {userRating &&
+          <p>{userRating.rating}</p>
+        }
+      </figcaption>
+      <img src={poster.poster_path} alt={poster.title} id={poster.id}/>
+    </figure>
+  )
+>>>>>>> master
 }
 
 export default Poster
