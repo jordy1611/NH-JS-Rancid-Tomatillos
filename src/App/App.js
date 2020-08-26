@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Posters from '../Posters/Posters.js';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
@@ -78,30 +78,34 @@ class App extends Component {
 
   render() {
     return(
-    <main className="App">
-      <Header
-        displayHomePage={this.displayHomePage}
-        displayLoginPage={this.displayLoginPage}
-        view={this.state.view}
-        currentUser={this.state.currentUser}
-        logOut={this.logOut}
-      />
-      {this.state.view === 'home' && <Posters
-        posters={this.state.posters}
-        displayMovieInfoPage={this.displayMovieInfoPage}
-        userRatings={this.state.userRatings}
-      />}
-      {this.state.view === 'login' && <Login
-        displayHomePage={this.displayHomePage}
-        updateCurrentUser={this.updateCurrentUser}
-        displayUserRatings={this.displayUserRatings}
-      />}
-      {this.state.view === 'movie' && <MovieInfo
-        movie={this.state.movieInfo}
-        submitRating={this.submitRating}
-        isCurrentUser={this.state.currentUser.id ? true : false}
-      />}
-    </main>
+      <Router>
+        <main className="App">
+          <Header
+            displayHomePage={this.displayHomePage}
+            displayLoginPage={this.displayLoginPage}
+            view={this.state.view}
+            currentUser={this.state.currentUser}
+            logOut={this.logOut}
+          />
+          <Route exact path='/' render={() => {
+            return <Posters
+              posters={this.state.posters}
+              displayMovieInfoPage={this.displayMovieInfoPage}
+              userRatings={this.state.userRatings}
+            />}
+          }/>
+          {this.state.view === 'login' && <Login
+            displayHomePage={this.displayHomePage}
+            updateCurrentUser={this.updateCurrentUser}
+            displayUserRatings={this.displayUserRatings}
+          />}
+          {this.state.view === 'movie' && <MovieInfo
+            movie={this.state.movieInfo}
+            submitRating={this.submitRating}
+            isCurrentUser={this.state.currentUser.id ? true : false}
+          />}
+        </main>
+      </Router>
   )};
 }
 
