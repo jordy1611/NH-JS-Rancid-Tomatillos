@@ -11,7 +11,6 @@ class MovieInfo extends Component {
       isCurrentUser: props.isCurrentUser
     }
   }
-  // const movie = props.movie;
 
   preventDefault = (e) => {
     e.preventDefault()
@@ -33,6 +32,7 @@ class MovieInfo extends Component {
       console.log('whoops')
     }
   }
+
   render() {
     return (
       <article className="movie-info">

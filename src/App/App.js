@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, match } from 'react-router-dom';
 import Posters from '../Posters/Posters.js';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
@@ -101,7 +101,7 @@ class App extends Component {
               displayUserRatings={this.displayUserRatings}
             />}
           }/>
-          <Route path='/movie/:id' render={() => {
+          <Route path='/movies/:id' render={() => {
             return <MovieInfo
               movie={this.state.movieInfo}
               submitRating={this.submitRating}
