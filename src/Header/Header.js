@@ -13,7 +13,6 @@ const Header = (props) => {
       }
       {props.view === 'home' && userAttributes > 0 &&
         <button onClick={props.logOut}>Log Out</button>
-        
       }
       {props.view === 'login' &&
         <button onClick={props.displayHomePage}>Home</button>
