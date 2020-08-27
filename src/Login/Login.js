@@ -69,7 +69,7 @@ class Login extends Component {
               onChange={this.updateText}
             />
           </p>
-          <button data-testid="login-button" onClick={this.login} type="button">Log In</button>
+          <button className="login-button" onClick={this.login} type="button">Log In</button>
           {this.state.error &&
             <p id="error-message">Invalid Username/Password</p>
           }
