@@ -34,6 +34,7 @@ class App extends Component {
 
   displayMovieInfoPage = async (event) => {
     const id = event.target.id;
+
     try {
       const movie = await dataFetcher.getMovieById(id);
       this.setState({ movieInfo: movie, view: 'movie' });
@@ -117,15 +118,18 @@ class App extends Component {
               displayUserRatings={this.displayUserRatings}
             />}
           }/>
-          <Route path='/movies/:id' render={() => {
-            return <MovieInfo
-              movie={this.state.movieInfo}
-              submitRating={this.submitRating}
-              isCurrentUser={this.state.currentUser.id ? true : false}
-              isRated={this.isMovieRated()}
-              deleteRating={this.deleteRating}
-              displayUserRatings={this.displayUserRatings}
-            />}
+          <Route path='/movies/:movieId' render={({ match }) => {
+            // const movieToRender = await dataFetcher.getMovieById(match.params.movieId);
+              return <MovieInfo
+                movie={this.state.movie}
+                submitRating={this.submitRating}
+                isCurrentUser={this.state.currentUser.id ? true : false}
+                isRated={this.isMovieRated()}
+                deleteRating={this.deleteRating}
+                displayUserRatings={this.displayUserRatings}
+                movieId={match.params.movieId}
+              />
+            }
           }/>
         </main>
       </Router>
