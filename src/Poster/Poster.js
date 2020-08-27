@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import './Poster.css';
 
 const Poster = (props) => {
@@ -10,12 +10,14 @@ const Poster = (props) => {
   const rating = (userRating) ? `${averageRating}, ${userRating.rating}` : `${averageRating}`
 
   return (
-    <Link to={`/movies/${poster.id}`}>
-      <figure className="poster" onClick={props.setMovieView}>
-        <figcaption id={poster.id}>{rating}</figcaption>
-        <img src={poster.poster_path} alt={poster.title} id={poster.id} />
-      </figure>
-    </Link>
+    <Router>
+      <Link to={`/movies/${poster.id}`}>
+        <figure className="poster" onClick={props.setMovieView}>
+          <figcaption id={poster.id}>{rating}</figcaption>
+          <img src={poster.poster_path} alt={poster.title} id={poster.id} />
+        </figure>
+      </Link>
+    </Router>
   );
 }
 
