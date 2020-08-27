@@ -6,7 +6,7 @@ class MovieInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movie: props.movie,
+      movie: false,
       isRated: props.isRated,
       userRating: 0,
       isCurrentUser: props.isCurrentUser
