@@ -2,13 +2,13 @@ import React from 'react';
 import Posters from '../Posters/Posters.js'
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import sampleMovies from '../sampleMovies.js'
+import sampleData from '../sampleData.js'
 
 describe('Posters Component', () => {
 
 
   it('should have correct content when rendered', () => {
-    render(<Posters posters={ sampleMovies } displayMovieInfoPage={jest.fn()} />)
+    render(<Posters posters={ sampleData.movies } setMovieView={jest.fn()} userRatings={ sampleData.ratings }/>)
 
     const poster1 = screen.getByAltText('Greenland')
     const poster2 = screen.getByAltText('Archive')
@@ -24,7 +24,7 @@ describe('Posters Component', () => {
   });
 
   it('should be returned as a single article', () => {
-    render(<Posters posters={ sampleMovies } displayMovieInfoPage={jest.fn()} />)
+    render(<Posters posters={ sampleData.movies } displayMovieInfoPage={jest.fn()} userRatings={ sampleData.ratings }/>)
 
     const posters = screen.getByRole('article')
 
