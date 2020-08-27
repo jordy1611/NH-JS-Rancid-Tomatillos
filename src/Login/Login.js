@@ -33,10 +33,10 @@ class Login extends Component {
     const loginResponse = await dataFetcher.getLoginResponse(credentials);
 
     if (loginResponse.user) {
+      this.setState({loginOk: true});
       this.props.setHomeView();
       this.props.updateCurrentUser(loginResponse.user);
       this.props.displayUserRatings();
-      this.setState({loginOk: true});
     } else {
       this.setState({error: 'uh oh'});
     }
@@ -46,7 +46,6 @@ class Login extends Component {
     if (this.state.loginOk === true) {
       return <Redirect to='/'/>
     }
-
     return (
       <form>
         <fieldset className="login-fieldset">
