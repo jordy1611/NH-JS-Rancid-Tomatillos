@@ -11,7 +11,7 @@ const Header = (props) => {
       <h1>Rancid Tomatillos</h1>
       {props.view === "home" && userAttributes === 0 && (
         <Link to="/login">
-          <button onClick={props.displayLoginPage}>Login</button>
+          <button onClick={props.setLoginView}>Login</button>
         </Link>
       )}
       {props.view === "home" && userAttributes > 0 && (
@@ -21,23 +21,23 @@ const Header = (props) => {
       )}
       {props.view === "login" && (
         <Link to="/">
-          <button onClick={props.displayHomePage}>Home</button>
+          <button onClick={props.setHomeView}>Home</button>
         </Link>
       )}
       {props.view === "movie" && userAttributes === 0 && (
         <nav>
           <Link to="/">
-            <button onClick={props.displayHomePage}>Home</button>
+            <button onClick={props.setHomeView}>Home</button>
           </Link>
           <Link to="/login">
-            <button onClick={props.displayLoginPage}>Login</button>
+            <button onClick={props.setLoginView}>Login</button>
           </Link>
         </nav>
       )}
       {props.view === "movie" && userAttributes > 0 && (
         <nav>
           <Link to="/">
-            <button onClick={props.displayHomePage}>Home</button>
+            <button onClick={props.setHomeView}>Home</button>
           </Link>
           <Link to="/">
             <button onClick={props.logOut}>Log Out</button>

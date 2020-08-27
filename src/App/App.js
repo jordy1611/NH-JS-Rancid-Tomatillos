@@ -19,11 +19,11 @@ class App extends Component {
     };
   }
 
-  displayLoginPage = () => {
+  setLoginView = () => {
     this.setState({view: 'login'});
   }
 
-  displayHomePage = () => {
+  setHomeView = () => {
     this.setState({view: 'home', movieInfo: {}});
     this.displayUserRatings()
   }
@@ -98,8 +98,8 @@ class App extends Component {
       <Router>
         <main className="App">
           <Header
-            displayHomePage={this.displayHomePage}
-            displayLoginPage={this.displayLoginPage}
+            setHomeView={this.setHomeView}
+            setLoginView={this.setLoginView}
             view={this.state.view}
             currentUser={this.state.currentUser}
             logOut={this.logOut}
@@ -113,23 +113,21 @@ class App extends Component {
           }/>
           <Route exact path='/login' render={() => {
             return <Login
-              displayHomePage={this.displayHomePage}
+              setLoginView={this.setHomeView}
               updateCurrentUser={this.updateCurrentUser}
               displayUserRatings={this.displayUserRatings}
             />}
           }/>
           <Route path='/movies/:movieId' render={({ match }) => {
-            // const movieToRender = await dataFetcher.getMovieById(match.params.movieId);
-              return <MovieInfo
-                movie={this.state.movie}
-                submitRating={this.submitRating}
-                isCurrentUser={this.state.currentUser.id ? true : false}
-                isRated={this.isMovieRated()}
-                deleteRating={this.deleteRating}
-                displayUserRatings={this.displayUserRatings}
-                movieId={match.params.movieId}
-              />
-            }
+            return <MovieInfo
+              movie={this.state.movie}
+              submitRating={this.submitRating}
+              isCurrentUser={this.state.currentUser.id ? true : false}
+              isRated={this.isMovieRated()}
+              deleteRating={this.deleteRating}
+              displayUserRatings={this.displayUserRatings}
+              movieId={match.params.movieId}
+            />}
           }/>
         </main>
       </Router>

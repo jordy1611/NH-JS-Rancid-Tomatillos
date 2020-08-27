@@ -6,7 +6,6 @@ const Poster = (props) => {
   const poster = props.poster;
   const averageRating = props.poster.average_rating.toFixed(1);
   const userRating = props.userRating;
-  const rating = `${averageRating}`
 
   return (
     <Link to={`/movies/${poster.id}`}>
