@@ -41,13 +41,12 @@ class MovieInfo extends Component {
     this.props.displayUserRatings()
   }
 
-  displayMovieData = async () => {
+  componentDidMount = async () => {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
-    this.setState({movie: movieData});
+    this.setState({movie: movieData, isRated: this.props.isRated});
   }
 
   render() {
-    this.displayMovieData();
     if (this.state.movie) {
       return (
         <article className="movie-info">

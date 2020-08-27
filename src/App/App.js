@@ -117,7 +117,7 @@ class App extends Component {
           }/>
           <Route exact path='/login' render={() => {
             return <Login
-              setLoginView={this.setHomeView}
+              setHomeView={this.setHomeView}
               updateCurrentUser={this.updateCurrentUser}
               displayUserRatings={this.displayUserRatings}
             />}
