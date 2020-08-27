@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Posters from '../Posters/Posters.js';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
@@ -18,11 +19,11 @@ class App extends Component {
     };
   }
 
-  displayLoginPage = () => {
+  setLoginView = () => {
     this.setState({view: 'login'});
   }
 
-  displayHomePage = () => {
+  setHomeView = () => {
     this.setState({view: 'home', movieInfo: {}});
     this.displayUserRatings()
   }
@@ -33,6 +34,7 @@ class App extends Component {
 
   displayMovieInfoPage = async (event) => {
     const id = event.target.id;
+
     try {
       const movie = await dataFetcher.getMovieById(id);
       this.setState({ movieInfo: movie, view: 'movie' });
@@ -93,33 +95,42 @@ class App extends Component {
 
   render() {
     return(
-    <main className="App">
-      <Header
-        displayHomePage={this.displayHomePage}
-        displayLoginPage={this.displayLoginPage}
-        view={this.state.view}
-        currentUser={this.state.currentUser}
-        logOut={this.logOut}
-      />
-      {this.state.view === 'home' && <Posters
-        posters={this.state.posters}
-        displayMovieInfoPage={this.displayMovieInfoPage}
-        userRatings={this.state.userRatings}
-      />}
-      {this.state.view === 'login' && <Login
-        displayHomePage={this.displayHomePage}
-        updateCurrentUser={this.updateCurrentUser}
-        displayUserRatings={this.displayUserRatings}
-      />}
-      {this.state.view === 'movie' && <MovieInfo
-        movie={this.state.movieInfo}
-        submitRating={this.submitRating}
-        isCurrentUser={this.isCurrentUser()}
-        isRated={this.isMovieRated()}
-        deleteRating={this.deleteRating}
-        displayUserRatings={this.displayUserRatings}
-      />}
-    </main>
+      <Router>
+        <main className="App">
+          <Header
+            setHomeView={this.setHomeView}
+            setLoginView={this.setLoginView}
+            view={this.state.view}
+            currentUser={this.state.currentUser}
+            logOut={this.logOut}
+          />
+          <Route exact path='/' render={() => {
+            return <Posters
+              posters={this.state.posters}
+              displayMovieInfoPage={this.displayMovieInfoPage}
+              userRatings={this.state.userRatings}
+            />}
+          }/>
+          <Route exact path='/login' render={() => {
+            return <Login
+              setLoginView={this.setHomeView}
+              updateCurrentUser={this.updateCurrentUser}
+              displayUserRatings={this.displayUserRatings}
+            />}
+          }/>
+          <Route path='/movies/:movieId' render={({ match }) => {
+            return <MovieInfo
+              movie={this.state.movie}
+              submitRating={this.submitRating}
+              isCurrentUser={this.state.currentUser.id ? true : false}
+              isRated={this.isMovieRated()}
+              deleteRating={this.deleteRating}
+              displayUserRatings={this.displayUserRatings}
+              movieId={match.params.movieId}
+            />}
+          }/>
+        </main>
+      </Router>
   )};
 }
 
