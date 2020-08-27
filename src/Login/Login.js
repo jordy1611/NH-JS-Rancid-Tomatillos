@@ -33,7 +33,7 @@ class Login extends Component {
     const loginResponse = await dataFetcher.getLoginResponse(credentials);
 
     if (loginResponse.user) {
-      this.props.displayHomePage();
+      this.props.setHomeView();
       this.props.updateCurrentUser(loginResponse.user);
       this.props.displayUserRatings();
       this.setState({loginOk: true});

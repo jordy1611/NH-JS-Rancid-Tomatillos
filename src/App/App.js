@@ -77,12 +77,16 @@ class App extends Component {
 
   isMovieRated = () => {
     if(this.state.userRatings.length > 0) {
-      return this.state.userRatings.some(rating => rating.movie_id === this.state.movieInfo.id)
+      return this.state.userRatings.some(rating => {
+        return rating.movie_id === this.state.movieInfo.id
+      })
     }
   }
 
   deleteRating = async () => {
-    const ratingToDelete = this.state.userRatings.find(rating => rating.movie_id === this.state.movieInfo.id)
+    const ratingToDelete = this.state.userRatings.find(rating => {
+      return rating.movie_id === this.state.movieInfo.id
+    })
     if (ratingToDelete) {
       await dataFetcher.deleteUserRating(ratingToDelete)
       this.displayUserRatings()
