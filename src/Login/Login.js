@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import dataFetcher from '../dataFetcher';
+import { Redirect } from 'react-router-dom';
 import './Login.css';
 
 class Login extends Component {
@@ -8,7 +9,8 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      error: ''
+      error: '',
+      loginOk: false
     };
   }
 
@@ -34,12 +36,17 @@ class Login extends Component {
       this.props.displayHomePage();
       this.props.updateCurrentUser(loginResponse.user);
       this.props.displayUserRatings();
+      this.setState({loginOk: true});
     } else {
       this.setState({error: 'uh oh'});
     }
   }
 
   render() {
+    if (this.state.loginOk === true) {
+      return <Redirect to='/'/>
+    }
+
     return (
       <form>
         <fieldset className="login-fieldset">
