@@ -21,6 +21,7 @@ figcaption {
   position: absolute;
   max-height: 3em;
 }
+
 figcaption > p {
   margin: 0;
 }

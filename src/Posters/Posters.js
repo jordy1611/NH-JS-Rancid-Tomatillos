@@ -14,11 +14,11 @@ const Posters = (props) => {
           return rating.movie_id === poster.id
         })
 
-        return <Poster 
-          poster= { poster } 
-          key={ poster.id } 
-          userRating={ ratingMatch } 
-          displayMovieInfoPage={ props.displayMovieInfoPage }
+        return <Poster
+          poster= { poster }
+          key={ poster.id }
+          userRating={ ratingMatch }
+          setMovieView={ props.setMovieView }
         />
       })
     }

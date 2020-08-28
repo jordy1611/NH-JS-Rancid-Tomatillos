@@ -40,11 +40,11 @@ p {
   align-content: center;
 }
 
-fieldset > button {
+.login-button {
   color: white;
   background-color: black;
   border: solid .15em;
-  margin: auto;
+  margin: 0 0 0 35%;
   font-size: .8em;
   width: 30%;
 }

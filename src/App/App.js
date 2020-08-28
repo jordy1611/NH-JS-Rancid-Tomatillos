@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Posters from '../Posters/Posters.js';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
@@ -32,15 +32,8 @@ class App extends Component {
     this.setState({currentUser: user});
   }
 
-  displayMovieInfoPage = async (event) => {
-    const id = event.target.id;
-
-    try {
-      const movie = await dataFetcher.getMovieById(id);
-      this.setState({ movieInfo: movie, view: 'movie' });
-    } catch (error) {
-      console.error(error);
-    }
+  setMovieView = () => {
+    this.setState({view: 'movie' });
   }
 
   submitRating = async (userRating) => {
@@ -77,12 +70,16 @@ class App extends Component {
 
   isMovieRated = () => {
     if(this.state.userRatings.length > 0) {
-      return this.state.userRatings.some(rating => rating.movie_id === this.state.movieInfo.id)
+      return this.state.userRatings.some(rating => {
+        return rating.movie_id === this.state.movieInfo.id
+      })
     }
   }
 
   deleteRating = async () => {
-    const ratingToDelete = this.state.userRatings.find(rating => rating.movie_id === this.state.movieInfo.id)
+    const ratingToDelete = this.state.userRatings.find(rating => {
+      return rating.movie_id === this.state.movieInfo.id
+    })
     if (ratingToDelete) {
       await dataFetcher.deleteUserRating(ratingToDelete)
       this.displayUserRatings()
@@ -94,6 +91,7 @@ class App extends Component {
   }
 
   render() {
+
     return(
       <Router>
         <main className="App">
@@ -107,20 +105,25 @@ class App extends Component {
           <Route exact path='/' render={() => {
             return <Posters
               posters={this.state.posters}
-              displayMovieInfoPage={this.displayMovieInfoPage}
+              setMovieView={this.setMovieView}
               userRatings={this.state.userRatings}
             />}
           }/>
           <Route exact path='/login' render={() => {
+            if (this.state.view === 'home') {
+              return <Redirect to='/' />
+            }
             return <Login
-              setLoginView={this.setHomeView}
+              setHomeView={this.setHomeView}
               updateCurrentUser={this.updateCurrentUser}
               displayUserRatings={this.displayUserRatings}
             />}
           }/>
           <Route path='/movies/:movieId' render={({ match }) => {
+            if (this.state.view === 'home') {
+              return <Redirect to='/' />
+            }
             return <MovieInfo
-              movie={this.state.movie}
               submitRating={this.submitRating}
               isCurrentUser={this.state.currentUser.id ? true : false}
               isRated={this.isMovieRated()}

@@ -24,7 +24,7 @@ const Header = (props) => {
           <button onClick={props.setHomeView}>Home</button>
         </Link>
       )}
-      {props.view === "movie" && userAttributes === 0 && (
+      {props.view === "movie" && !userDisplay && (
         <nav>
           <Link to="/">
             <button onClick={props.setHomeView}>Home</button>
@@ -34,7 +34,7 @@ const Header = (props) => {
           </Link>
         </nav>
       )}
-      {props.view === "movie" && userAttributes > 0 && (
+      {props.view === "movie" && userDisplay && (
         <nav>
           <Link to="/">
             <button onClick={props.setHomeView}>Home</button>

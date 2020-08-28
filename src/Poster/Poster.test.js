@@ -2,8 +2,9 @@ import React from 'react';
 import Poster from '../Poster/Poster.js'
 import { screen, fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { Link } from "react-router-dom";
 
-describe('Poster Component', () => {
+describe.only('Poster Component', () => {
   let poster;
   beforeAll(() => {
     poster = {
@@ -19,24 +20,26 @@ describe('Poster Component', () => {
   it('should have the correct content when rendered', () => {
     render(< Poster poster= { poster } key={poster.id} displayMovieInfoPage={jest.fn()}/>)
 
-    const rating = screen.getByText('9')
+    const rating = screen.getByText('9.0')
     const image = screen.getByAltText('Greenland')
 
     expect(rating).toBeInTheDocument()
     expect(image).toBeInTheDocument()
+
   });
 
   it('should fire a function when the image or rating is clicked', () => {
-    const mockDisplayMovieInfoPage = jest.fn()
-    render(< Poster poster= { poster } key={poster.id} displayMovieInfoPage={mockDisplayMovieInfoPage}/>)
+    const mockSetMovieView = jest.fn()
+    render(< Poster poster= { poster } key={poster.id} setMovieView={mockSetMovieView}/>)
 
     const image = screen.getByAltText('Greenland')
-    const rating = screen.getByText('9')
+    const rating = screen.getByText('9.0')
 
     fireEvent.click(image);
     fireEvent.click(rating);
 
-    expect(mockDisplayMovieInfoPage).toBeCalledTimes(2);
+    expect(mockSetMovieView).toBeCalledTimes(2);
+
   });
 
   it('should be returned as a single figure', () => {
@@ -45,5 +48,6 @@ describe('Poster Component', () => {
     const moviePoster = screen.getByRole('figure')
 
     expect(moviePoster).toBeInTheDocument()
+
   });
 })

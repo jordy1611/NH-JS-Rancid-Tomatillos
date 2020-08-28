@@ -62,7 +62,43 @@ const sampleData = {
       email: '123@yahoo.com',
       id: '2'
     }
-  }
+  },
+  ratings: [
+    {
+      "id": 1780,
+      "user_id": 66,
+      "movie_id": 620,
+      "rating": 9,
+      "created_at": "2020-08-25T21:10:19.688Z",
+      "updated_at": "2020-08-25T21:10:19.688Z"
+    },
+    {
+      "id": 1790,
+      "user_id": 66,
+      "movie_id": 659991,
+      "rating": 5,
+      "created_at": "2020-08-25T22:14:26.222Z",
+      "updated_at": "2020-08-25T22:14:26.222Z"
+    },
+    {
+      "id": 1793,
+      "user_id": 66,
+      "movie_id": 517412,
+      "rating": 6,
+      "created_at": "2020-08-25T22:32:59.561Z",
+      "updated_at": "2020-08-25T22:32:59.561Z"
+    },
+    {
+      "id": 1795,
+      "user_id": 66,
+      "movie_id": 530915,
+      "rating": 10,
+      "created_at": "2020-08-25T22:36:39.790Z",
+      "updated_at": "2020-08-25T22:36:39.790Z"
+    }
+  ]
+
+
 }
 
 export default sampleData;
