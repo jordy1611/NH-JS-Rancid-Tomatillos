@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { withRouter } from 'react-router-dom';
 import dataFetcher from '../dataFetcher';
 import './MovieInfo.css';
 
@@ -6,7 +7,7 @@ class MovieInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movie: false,
+      movie: props.movie,
       isRated: props.isRated,
       userRating: 0,
       isCurrentUser: props.isCurrentUser

@@ -54,7 +54,7 @@ const sampleData = {
     "revenue": 0,
     "runtime": 124,
     "tagline": "Neo-Tokyo is about to E.X.P.L.O.D.E.",
-    "average_rating": 6
+    "average_rating": 6.0
   },
   loginResponse: {
     user: {

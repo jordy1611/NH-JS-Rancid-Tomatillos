@@ -2,7 +2,7 @@ import React from 'react';
 import Poster from '../Poster/Poster.js'
 import { screen, fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 
 describe.only('Poster Component', () => {
   let poster;
@@ -18,8 +18,12 @@ describe.only('Poster Component', () => {
   });
 
   it('should have the correct content when rendered', () => {
-    render(< Poster poster= { poster } key={poster.id} displayMovieInfoPage={jest.fn()}/>)
-
+    render(
+      <Router>
+        <Poster poster={poster} key={poster.id} displayMovieInfoPage={jest.fn()} />
+      </Router>
+    )
+      
     const rating = screen.getByText('9.0')
     const image = screen.getByAltText('Greenland')
 
@@ -30,7 +34,11 @@ describe.only('Poster Component', () => {
 
   it('should fire a function when the image or rating is clicked', () => {
     const mockSetMovieView = jest.fn()
-    render(< Poster poster= { poster } key={poster.id} setMovieView={mockSetMovieView}/>)
+    render(
+      <Router>
+        <Poster poster= { poster } key={poster.id} setMovieView={mockSetMovieView}/>
+      </Router>
+    )
 
     const image = screen.getByAltText('Greenland')
     const rating = screen.getByText('9.0')
@@ -43,7 +51,11 @@ describe.only('Poster Component', () => {
   });
 
   it('should be returned as a single figure', () => {
-    render(< Poster poster= { poster } key={poster.id} displayMovieInfoPage={jest.fn()}/>)
+    render(
+      <Router>
+        <Poster poster= { poster } key={poster.id} displayMovieInfoPage={jest.fn()}/>
+      </Router>
+    )
 
     const moviePoster = screen.getByRole('figure')
 
