@@ -6,5 +6,9 @@ import '@testing-library/jest-dom';
 describe('Comments', () => {
   it('should render without crashing', () => {
     render(<Comments />);
+
+    const commentsHeader = screen.getByText('Comments');
+
+    expect(commentsHeader).toBeInTheDocument();
   })
 })
