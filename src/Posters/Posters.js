@@ -1,27 +1,26 @@
 import React from 'react'
 import './Posters.css';
 import Poster from '../Poster/Poster.js'
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const Posters = (props) => {
   const posters = props.posters
 
   return (
     <article className="poster-container">
-      <Router>
         {posters.map(poster => {
           const ratingMatch = props.userRatings.find(rating => {
             return rating.movie_id === poster.id
           })
 
-          return <Poster
-            poster= { poster }
-            key={ poster.id }
-            userRating={ ratingMatch }
-            setMovieView={ props.setMovieView }
-          />
+          return <Link to={`/movies/${poster.id}`} key={ poster.id }>
+            <Poster
+              poster= { poster }
+              userRating={ ratingMatch }
+              setMovieView={ props.setMovieView }
+            />
+          </Link>
         })}
-      </Router>
     </article>
   )
 }

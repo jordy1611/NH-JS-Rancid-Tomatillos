@@ -24,7 +24,6 @@ describe.only('Poster Component', () => {
       </Router>
     )
       
-
     const rating = screen.getByText('9.0')
     const image = screen.getByAltText('Greenland')
 

@@ -1,13 +1,19 @@
 import React from 'react';
 import MovieInfo from '../MovieInfo/MovieInfo.js';
 import testMovie from './testMovie.js';
+import sampleData from '../sampleData.js';
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+jest.mock('../dataFetcher.js');
 
 describe('MovieInfo', () => {
 
   it('should display all relevant movie information', () => {
-    render(<MovieInfo movie={testMovie}/>)
+    const testMovie = sampleData.movie;
+
+    render(
+      <MovieInfo movie={testMovie}/>
+    )
 
     const backdrop = screen.getByAltText('Akira backdrop');
     const heading = screen.getByRole('heading');
@@ -19,7 +25,7 @@ describe('MovieInfo', () => {
     const budget = screen.getByText(`Budget: ${testMovie.budget}`)
     const runtime = screen.getByText(`Runtime: ${testMovie.runtime} days`)
     const tagline = screen.getByText(`Tagline: ${testMovie.tagline}`)
-    const averageRating = screen.getByText(`Average Rating: ${testMovie.average_rating}`)
+    const averageRating = screen.getByText(`Average Rating: 6.0`)
 
     expect(backdrop).toBeInTheDocument();
     expect(heading).toBeInTheDocument();
