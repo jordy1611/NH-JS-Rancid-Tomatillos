@@ -55,9 +55,8 @@ const dataFetcher = {
   },
 
   getAllComments(movieId) {
-    fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
+    return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
       .then(response => response.json())
-      .then(data => console.log(data))
       .catch(error => console.error(error));
   }
 }

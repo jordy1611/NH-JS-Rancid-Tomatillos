@@ -47,7 +47,7 @@ class MovieInfo extends Component {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
     const comments = await dataFetcher.getAllComments(this.props.movieId);
 
-    this.setState({movie: movieData, isRated: this.props.isRated, comments: comments});
+    this.setState({movie: movieData, isRated: this.props.isRated, comments: comments.comments});
   }
 
   render() {
