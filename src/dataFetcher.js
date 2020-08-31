@@ -58,6 +58,17 @@ const dataFetcher = {
     return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
       .then(response => response.json())
       .catch(error => console.error(error));
+  },
+
+  submitReview(movieId, review) {
+    return fetch(`http://localhost:3000/api/v1/movies/${movieId}/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(review),
+    }).then(response => response.json())
+      .catch(error => console.error(error))
   }
 }
 

@@ -37,6 +37,10 @@ class MovieInfo extends Component {
     }
   }
 
+  postReview = () => {
+    dataFetcher.submitReview()
+  }
+
   deleteRating = () => {
     this.props.deleteRating()
     this.setState( {isRated: false} )
