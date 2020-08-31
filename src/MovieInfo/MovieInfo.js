@@ -89,7 +89,7 @@ class MovieInfo extends Component {
           {this.state.isCurrentUser && this.state.isRated &&
             <button onClick={this.deleteRating}>Delete</button>
           }
-          <Comments comments={this.state.comments}/>
+          <Comments comments={this.state.comments} isCurrentUser={this.state.isCurrentUser}/>
         </article>
       )
     } else {
