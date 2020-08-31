@@ -17,8 +17,8 @@ class App extends Component {
       movieInfo: {},
       currentUser: {},
       userRatings: [],
-      userFavorites: [],
-      // userFavorites: sampleData.movies,
+      // userFavorites: [],
+      userFavorites: sampleData.movies,
     };
   }
 
@@ -39,13 +39,19 @@ class App extends Component {
     this.setState({view: 'movie' });
   }
 
+  setMovieInfo = () => {
+
+  }
+
   setFavoritesView = () => {
     this.setState({ view: 'favorites'})
   }
 
-  submitRating = async (userRating) => {
-    const rating = {user_id: this.state.currentUser.id, movie_id: this.state.movieInfo.id, rating: userRating || this.state.movieInfo.average_rating}
+  submitRating = async (userRating, movieId) => {
+    const rating = {user_id: this.state.currentUser.id, movie_id: movieId, rating: userRating || this.state.movieInfo.average_rating}
+    console.log(rating)
     await dataFetcher.submitUserRating(rating);
+    const movieInfo = await dataFetcher.getMovieById(movieId)
     this.displayUserRatings();
   }
 
@@ -75,10 +81,12 @@ class App extends Component {
     }
   }
 
-  isMovieRated = () => {
+  isMovieRated = (movieId) => {
     if(this.state.userRatings.length > 0) {
+      const movieID = parseInt(movieId)
+      const testRating = this.state.userRatings.find(rating => rating.movie_id == movieID)
       return this.state.userRatings.some(rating => {
-        return rating.movie_id === this.state.movieInfo.id
+        return rating.movie_id === movieID
       })
     }
   }
@@ -133,7 +141,7 @@ class App extends Component {
             return <MovieInfo
               submitRating={this.submitRating}
               isCurrentUser={this.state.currentUser.id ? true : false}
-              isRated={this.isMovieRated()}
+              isRated={this.isMovieRated}
               deleteRating={this.deleteRating}
               displayUserRatings={this.displayUserRatings}
               movieId={match.params.movieId}

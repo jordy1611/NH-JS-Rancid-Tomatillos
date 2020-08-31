@@ -8,7 +8,7 @@ class MovieInfo extends Component {
     super(props);
     this.state = {
       movie: props.movie,
-      isRated: props.isRated,
+      isRated: props.isRated(props.movieId),
       userRating: 0,
       isCurrentUser: props.isCurrentUser
     }
@@ -28,9 +28,9 @@ class MovieInfo extends Component {
 
   rateMovie = (props) => {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
-      console.log(this.state.rated)
-      this.props.submitRating(this.state.userRating)
+      console.log(this.state.isRated)
       this.setState( {isRated: true })
+      this.props.submitRating(this.state.userRating, this.props.movieId)
     } else {
       console.log('whoops')
     }
