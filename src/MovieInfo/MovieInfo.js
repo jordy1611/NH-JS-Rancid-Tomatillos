@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router-dom';
 import dataFetcher from '../dataFetcher';
+import Comments from '../Comments/Comments';
 import './MovieInfo.css';
 
 class MovieInfo extends Component {
@@ -86,6 +86,7 @@ class MovieInfo extends Component {
           {this.state.isCurrentUser && this.state.isRated &&
             <button onClick={this.deleteRating}>Delete</button>
           }
+          <Comments />
         </article>
       )
     } else {
