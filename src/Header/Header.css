@@ -3,7 +3,8 @@ header {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 3em;
-  height: 6em;
+  min-height: 6em;
+  margin-bottom: 1em;
 }
 
 h1{

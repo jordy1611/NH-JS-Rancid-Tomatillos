@@ -9,15 +9,30 @@ const Header = (props) => {
   return (
     <header>
       <h1>Rancid Tomatillos</h1>
-      {props.view === "home" && userAttributes === 0 && (
+      {props.view === "home" && !userDisplay && (
         <Link to="/login">
           <button onClick={props.setLoginView}>Login</button>
         </Link>
       )}
-      {props.view === "home" && userAttributes > 0 && (
-        <Link to="/">
-          <button onClick={props.logOut}>Log Out</button>
+      {props.view === "home" && userDisplay && (
+        <nav>
+        <Link to="/favorites">
+        <button onClick={props.setFavoritesView}>My Favorites</button>
         </Link>
+          <Link to="/">
+            <button onClick={props.logOut}>Log Out</button>
+          </Link>
+        </nav>
+      )}
+      {props.view === "favorites" && userDisplay && (
+        <nav>
+          <Link to="/">
+            <button onClick={props.setHomeView}>Home</button>
+          </Link>
+          <Link to="/">
+            <button onClick={props.logOut}>Log Out</button>
+          </Link>
+        </nav>
       )}
       {props.view === "login" && (
         <Link to="/">
@@ -41,6 +56,9 @@ const Header = (props) => {
           </Link>
           <Link to="/">
             <button onClick={props.logOut}>Log Out</button>
+          </Link>
+          <Link to="/favorites">
+            <button onClick={props.setFavoritesView}>My Favorites</button>
           </Link>
         </nav>
       )}

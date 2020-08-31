@@ -5,6 +5,24 @@ body{
   margin: 0;
 }
 
+.no-favorites-display{
+  font-size: .85em;
+  color: white;
+  border: solid .5em;
+  border-radius: .3em;
+  background-color: black;
+  opacity: .9;
+  width: 60%;
+  padding: 2em 0 2em 0;
+  align-self: center;
+  margin: 0 20%
+}
+
+.no-favorites-button {
+  font-size: 2.5em;
+}
+
+
 .App {
   text-align: center;
 }

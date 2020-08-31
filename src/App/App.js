@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
 import Posters from '../Posters/Posters.js';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
 import MovieInfo from '../MovieInfo/MovieInfo.js';
 import dataFetcher from '../dataFetcher';
 import './App.css';
+import sampleData from '../sampleData'
 
 class App extends Component {
   constructor() {
@@ -15,7 +16,9 @@ class App extends Component {
       view: 'home',
       movieInfo: {},
       currentUser: {},
-      userRatings: []
+      userRatings: [],
+      userFavorites: [],
+      // userFavorites: sampleData.movies,
     };
   }
 
@@ -34,6 +37,10 @@ class App extends Component {
 
   setMovieView = () => {
     this.setState({view: 'movie' });
+  }
+
+  setFavoritesView = () => {
+    this.setState({ view: 'favorites'})
   }
 
   submitRating = async (userRating) => {
@@ -97,6 +104,7 @@ class App extends Component {
           <Header
             setHomeView={this.setHomeView}
             setLoginView={this.setLoginView}
+            setFavoritesView={this.setFavoritesView}
             view={this.state.view}
             currentUser={this.state.currentUser}
             logOut={this.logOut}
@@ -130,6 +138,26 @@ class App extends Component {
               displayUserRatings={this.displayUserRatings}
               movieId={match.params.movieId}
             />}
+          }/>
+          <Route exact path='/favorites' render={() => {
+            if (this.state.userFavorites.length === 0) {
+              return <div className='no-favorites-display'>
+                        <h1>There's No Favorite Movies!</h1>
+                        <h1>Please Favorite Movies</h1>
+                        <h1>By Clicking The # Icon</h1>
+                        <h1>To View Them On This Page</h1>
+                        <Link to='/'>
+                          <button className='no-favorites-button' onClick={this.setHomeView}>
+                            Home
+                          </button>
+                        </Link>
+                      </div>
+            } else {
+            return <Posters
+              posters={this.state.userFavorites} // favorited poster
+              setMovieView={this.setMovieView}  // keep
+              userRatings={this.state.userRatings} // keep
+            />}}
           }/>
         </main>
       </Router>
