@@ -52,6 +52,13 @@ const dataFetcher = {
     })
     .then(() => console.log('Successful rating deletion'))
     .catch((error) => console.error(error))
+  },
+
+  getAllComments(movieId) {
+    fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   }
 }
 
