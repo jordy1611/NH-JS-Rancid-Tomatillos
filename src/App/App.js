@@ -56,14 +56,16 @@ class App extends Component {
   }
 
   displayFavorites = () => {
-    const favoriteMovies = this.state.userFavorites.reduce((favPosters, favorite) => {
-      favPosters.push(this.state.posters.find(poster => poster.id === favorite.id))
-      return favPosters
-    }, [])
-    console.log(favoriteMovies)
+    const favoriteMovies = this.state.posters.filter(poster => {
+      return this.state.userFavorites.includes(poster.id)
+    })
+    // const favoriteMovies = this.state.userFavorites.reduce((favPosters, favorite) => {
+    //   favPosters.push(this.state.posters.find(poster => poster.id === favorite.id))
+    //   return favPosters
+    // }, [])
+    console.log('favoriteMovies', favoriteMovies)
     this.setState({ view: 'favorites', favoriteMovies: favoriteMovies })
   }
-
 
 
   toggleUserFavorite = async(event) => {

@@ -66,7 +66,7 @@ const dataFetcher = {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: {id: movieId}
+      body: JSON.stringify({id: movieId})
     })
     const data = await response.json()
     return data

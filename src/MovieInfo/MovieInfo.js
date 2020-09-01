@@ -88,11 +88,14 @@ class MovieInfo extends Component {
                 </fieldset>
               </form>
             }
-          {this.state.isCurrentUser && this.state.isRated &&
+          {this.state.isCurrentUser && this.state.isRated && !
             <button onClick={this.deleteRating}>Delete</button>
           }
-          {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser &&
+          {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser && !this.state.isFavorited &&
             <div className="movie-info-favoriting"><h1>Favorite</h1><img src={notFavorite}/></div>
+          }
+          {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser && this.state.isFavorited &&
+            <div className="movie-info-favoriting"><h1>Un-Favorite</h1><img src={favorite}/></div>
           }
         </article>
       )
