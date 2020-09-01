@@ -9,17 +9,16 @@ const Poster = (props) => {
   const poster = props.poster;
   const averageRating = props.poster.average_rating.toFixed(1);
   const userRating = props.userRating;
-  const isFavorited = false
   const rating = (userRating) ? `${averageRating}, ${userRating.rating}` : `${averageRating}`
 
   return (
     <figure className="poster">
       <figcaption id={poster.id}>
         <p>{rating}</p>
-        {isFavorited && userRating &&
+        {props.isFavorited && props.isCurrentUser &&
           <img src={favorite} className="rating-star" />
         }
-        {!isFavorited &&
+        {!props.isFavorited && props.isCurrentUser &&
           <img src={notFavorite} className="rating-star" />
         }
       </figcaption>

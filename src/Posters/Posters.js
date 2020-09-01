@@ -12,14 +12,17 @@ const Posters = (props) => {
           const ratingMatch = props.userRatings.find(rating => {
             return rating.movie_id === poster.id
           })
-
+          const isFavorite = props.userFavorites ? props.userFavorites.some(userFavorite => {
+            return userFavorite.movieId === poster.id
+          }) : false
           return <Poster
               key={ poster.id }
               poster= { poster }
               userRating={ ratingMatch }
               setMovieView={ props.setMovieView }
+              isCurrentUser={ props.isCurrentUser }
+              isFavorited={ isFavorite }
             />
-
         })}
     </article>
   )

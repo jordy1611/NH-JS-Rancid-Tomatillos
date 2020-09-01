@@ -57,7 +57,6 @@ const dataFetcher = {
   async getFavoriteStatuses() {
     const response = await fetch('http://localhost:3001/api/v1/favorites')
     const data = await response.json()
-
     return data
   },
 

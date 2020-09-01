@@ -17,8 +17,7 @@ class App extends Component {
       movieInfo: {},
       currentUser: {},
       userRatings: [],
-      // userFavorites: [],
-      userFavorites: sampleData.movies,
+      userFavorites: [],
     };
   }
 
@@ -39,12 +38,20 @@ class App extends Component {
     this.setState({view: 'movie' });
   }
 
-  setMovieInfo = () => {
-
-  }
-
   setFavoritesView = () => {
     this.setState({ view: 'favorites'})
+  }
+
+  getUserFavorites = async() => {
+    try {
+      const userFavorites = await dataFetcher.getFavoriteStatuses()
+      this.setState({ userFavorite: userFavorites })
+    } catch (error) {
+      if(error) {
+        console.log('no local server for user favorites available')
+        this.setState( { userFavorites: null })
+      }
+    }
   }
 
   submitRating = async (userRating, movieId) => {
@@ -125,6 +132,8 @@ class App extends Component {
               posters={this.state.posters}
               setMovieView={this.setMovieView}
               userRatings={this.state.userRatings}
+              isCurrentUser={this.isCurrentUser()}
+              userFavorites={this.state.userFavorites}
             />}
           }/>
           <Route exact path='/login' render={() => {
@@ -135,6 +144,7 @@ class App extends Component {
               setHomeView={this.setHomeView}
               updateCurrentUser={this.updateCurrentUser}
               displayUserRatings={this.displayUserRatings}
+              getUserFavorites={this.getUserFavorites}
             />}
           }/>
           <Route path='/movies/:movieId' render={({ match }) => {
@@ -168,6 +178,8 @@ class App extends Component {
               posters={this.state.userFavorites} // favorited poster
               setMovieView={this.setMovieView}  // keep
               userRatings={this.state.userRatings} // keep
+              isCurrentUser={this.isCurrentUser()}
+              userFavorites={this.state.userFavorites}
             />}}
           }/>
         </main>
