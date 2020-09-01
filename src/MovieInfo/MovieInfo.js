@@ -26,25 +26,24 @@ class MovieInfo extends Component {
     this.setState({userRating: parseInt(e.target.value)})
   }
 
-  rateMovie = (props) => {
+  rateMovie = () => {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
-      console.log(this.state.isRated)
       this.setState( {isRated: true })
       this.props.submitRating(this.state.userRating, this.props.movieId)
     } else {
-      console.log('whoops')
+      console.log('sorry must be logged in to submit a rating')
     }
   }
 
   deleteRating = () => {
-    this.props.deleteRating()
+    this.props.deleteRating(this.props.movieId)
     this.setState( {isRated: false} )
     this.props.displayUserRatings()
   }
 
   componentDidMount = async () => {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
-    this.setState({movie: movieData, isRated: this.props.isRated});
+    this.setState({movie: movieData, isRated: this.props.isRated(this.props.movieId)});
   }
 
   render() {

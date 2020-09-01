@@ -52,6 +52,29 @@ const dataFetcher = {
     })
     .then(() => console.log('Successful rating deletion'))
     .catch((error) => console.error(error))
+  },
+
+  getFavoriteStatuses() {
+    const response = await fetch('http://localhost:3001/api/v1/favorites')
+    const data = await response.json()
+
+    return data
+  },
+
+  postFavoriteStatus(id) {
+    fetch('http://localhost:3001/api/v1/favorites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: id
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      return data
+    })
+    .catch((error) => console.error())
+
   }
 }
 
