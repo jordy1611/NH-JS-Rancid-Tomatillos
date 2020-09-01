@@ -47,7 +47,7 @@ class MovieInfo extends Component {
     this.props.displayUserRatings()
   }
 
-  postReview = async () => {
+  postComment = async () => {
     const commentToPost = {
       comment: this.state.commentInput,
       author: this.props.currentUser.name,
@@ -58,6 +58,7 @@ class MovieInfo extends Component {
     await dataFetcher.submitComment(commentToPost);
     const comments = await dataFetcher.getAllComments(this.props.movieId);
     this.setState({ comments: comments, commentInput: '' });
+    document.getElementById('comment-form').reset();
   }
 
   componentDidMount = async () => {
@@ -111,7 +112,7 @@ class MovieInfo extends Component {
             isCurrentUser={this.state.isCurrentUser}
             movieId={this.props.movieId}
             currentUser={this.props.currentUser}
-            postReview={this.postReview}
+            postComment={this.postComment}
             updateText={this.updateText}
           />
         </article>
