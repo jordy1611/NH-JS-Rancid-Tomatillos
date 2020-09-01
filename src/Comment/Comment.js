@@ -1,11 +1,12 @@
 import React from 'react';
+import './Comment.css'
 
 const Comment = (props) => {
   return (
-    <div>
-      <p>{props.comment.comment}</p>
+    <section className="comment">
       <p>{props.comment.author}</p>
-    </div>
+      <p>{props.comment.comment}</p>
+    </section>
   )
 }
 

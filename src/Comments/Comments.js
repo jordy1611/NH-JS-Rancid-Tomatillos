@@ -1,5 +1,6 @@
 import React from 'react';
 import Comment from '../Comment/Comment';
+import './Comments.css'
 
 const Comments = (props) => {
   return (
@@ -9,7 +10,7 @@ const Comments = (props) => {
         return <Comment comment={comment} key={comment.id} />
       })}
       {!props.isCurrentUser && (
-        <div>Log in to join the conversation!</div>
+        <div className="log-in-cta">Log in to join the conversation!</div>
       )}
       {props.isCurrentUser && (
         <form id="comment-form">
