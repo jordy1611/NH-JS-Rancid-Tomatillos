@@ -186,6 +186,7 @@ class App extends Component {
               movieId={match.params.movieId}
               userFavorites={this.state.userFavorites}
               toggleUserFavorite={this.toggleUserFavorite}
+              currentUser={this.state.currentUser}
             />}
           }/>
           <Route exact path='/favorites' render={() => {

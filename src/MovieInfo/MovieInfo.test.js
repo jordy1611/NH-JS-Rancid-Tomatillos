@@ -16,7 +16,7 @@ describe('MovieInfo', () => {
     )
 
     const backdrop = screen.getByAltText('Akira backdrop');
-    const heading = screen.getByRole('heading');
+    const heading = screen.getByRole('heading', {name: 'Akira'});
     const releaseDate = screen.getByText(`Release Date: ${testMovie.release_date}`)
     const overview = screen.getByText(`Overview: ${testMovie.overview}`)
     const genres = screen.getByRole('list');
