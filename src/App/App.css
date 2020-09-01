@@ -20,6 +20,12 @@ body{
 
 .no-favorites-button {
   font-size: 2.5em;
+  margin: 0
+}
+
+.no-favorites-icon {
+  width: 1em;
+  height: 1em;
 }
 
 

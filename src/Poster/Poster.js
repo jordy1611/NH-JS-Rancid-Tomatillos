@@ -10,17 +10,18 @@ const Poster = (props) => {
   const averageRating = props.poster.average_rating.toFixed(1);
   const userRating = props.userRating;
   const rating = (userRating) ? `${averageRating}, ${userRating.rating}` : `${averageRating}`
-  let isFavorited = props.isFavorited
+  // let isFavorited = props.isFavorited
   const areFavorites = props.isFavorite !== null
   return (
     <figure className="poster">
       <figcaption id={poster.id}>
         <p>{rating}</p>
         {areFavorites && props.isFavorite && props.isCurrentUser &&
-          <img src={favorite} className="rating-star" onClick={props.toggleUserFavorite} id={poster.id}/>
+          <img src={favorite} className="rating-star" onClick={(event) => {props.toggleUserFavorite(event); props.filterFavorites()}} id={poster.id}
+          />
         }
         {areFavorites && !props.isFavorite && props.isCurrentUser &&
-          <img src={notFavorite} className="rating-star" onClick={props.toggleUserFavorite} id={poster.id}/>
+          <img src={notFavorite} className="rating-star" onClick={(event) => {props.toggleUserFavorite(event); props.filterFavorites()}} id={poster.id}/>
         }
       </figcaption>
       <Link to={`/movies/${poster.id}`}>

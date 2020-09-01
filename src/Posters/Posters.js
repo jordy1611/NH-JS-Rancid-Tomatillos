@@ -18,9 +18,11 @@ const Posters = (props) => {
               poster= { poster }
               userRating={ ratingMatch }
               setMovieView={ props.setMovieView }
+              setFavoritesView={ props.setFavoritesView }
               isCurrentUser={ props.isCurrentUser }
               isFavorite={ isFavorite }
               toggleUserFavorite={ props.toggleUserFavorite }
+              filterFavorites={ props.filterFavorites }
             />
         })}
     </article>

@@ -7,6 +7,7 @@ import MovieInfo from '../MovieInfo/MovieInfo.js';
 import dataFetcher from '../dataFetcher';
 import './App.css';
 import sampleData from '../sampleData'
+import notFavorite from '../assets/notFavorite.png'
 
 class App extends Component {
   constructor() {
@@ -55,21 +56,16 @@ class App extends Component {
     }
   }
 
-  displayFavorites = () => {
+  filterFavorites = () => {
     const favoriteMovies = this.state.posters.filter(poster => {
       return this.state.userFavorites.includes(poster.id)
     })
-    // const favoriteMovies = this.state.userFavorites.reduce((favPosters, favorite) => {
-    //   favPosters.push(this.state.posters.find(poster => poster.id === favorite.id))
-    //   return favPosters
-    // }, [])
-    console.log('favoriteMovies', favoriteMovies)
-    this.setState({ view: 'favorites', favoriteMovies: favoriteMovies })
+    this.setState({ favoriteMovies: [] })
+    this.setState({ favoriteMovies: favoriteMovies }, () => {})
   }
 
 
   toggleUserFavorite = async(event) => {
-    console.log('id', event.target.id, typeof(event.target.id))
     try {
       const id = parseInt(event.target.id)
       await dataFetcher.postFavoriteStatus(id)
@@ -145,7 +141,8 @@ class App extends Component {
           <Header
             setHomeView={this.setHomeView}
             setLoginView={this.setLoginView}
-            displayFavorites={this.displayFavorites}
+            setFavoritesView={this.setFavoritesView}
+            filterFavorites={this.filterFavorites}
             view={this.state.view}
             currentUser={this.state.currentUser}
             logOut={this.logOut}
@@ -154,10 +151,13 @@ class App extends Component {
             return <Posters
               posters={this.state.posters}
               setMovieView={this.setMovieView}
+              setFavoritesView={this.setFavoritesView}
               userRatings={this.state.userRatings}
               isCurrentUser={this.isCurrentUser()}
               userFavorites={this.state.userFavorites}
               toggleUserFavorite={this.toggleUserFavorite}
+              view={this.state.view}
+              filterFavorites={this.filterFavorites}
             />}
           }/>
           <Route exact path='/login' render={() => {
@@ -191,7 +191,7 @@ class App extends Component {
               return <div className='no-favorites-display'>
                         <h1>There's No Favorite Movies!</h1>
                         <h1>Please Favorite Movies</h1>
-                        <h1>By Clicking The # Icon</h1>
+                        <h1>By Clicking The <img className="no-favorites-icon" src={notFavorite}/> Icon</h1>
                         <h1>To View Them On This Page</h1>
                         <Link to='/'>
                           <button className='no-favorites-button' onClick={this.setHomeView}>
@@ -201,12 +201,14 @@ class App extends Component {
                       </div>
             } else {
             return <Posters
-              posters={this.state.favoriteMovies} // favorited poster
-              setMovieView={this.setMovieView}  // keep
-              userRatings={this.state.userRatings} // keep
+              posters={this.state.favoriteMovies}
+              setMovieView={this.setMovieView}
+              userRatings={this.state.userRatings}
               isCurrentUser={this.isCurrentUser()}
               userFavorites={this.state.userFavorites}
               toggleUserFavorite={this.toggleUserFavorite}
+              filterFavorites={this.filterFavorites}
+              view={this.state.view}
             />}}
           }/>
         </main>
