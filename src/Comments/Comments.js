@@ -16,7 +16,7 @@ const Comments = (props) => {
         <form id="comment-form">
           <fieldset>
             <legend>Submit a comment</legend>
-            <textarea id="comment-input" type="text" onChange={props.updateText} value="What do you think of the movie?" />
+            <textarea id="comment-input" type="text" onChange={props.updateText} defaultValue="What do you think of the movie?" />
             <button type="button" onClick={props.postComment} id="comment-submit-button">Submit your comment</button>
           </fieldset>
         </form>
