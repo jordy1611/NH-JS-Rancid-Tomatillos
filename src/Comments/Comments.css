@@ -34,3 +34,8 @@ legend {
 textarea {
   font-family: inherit;
 }
+
+#comment-submit-button {
+  margin: 0;
+  height: 3em;
+}
