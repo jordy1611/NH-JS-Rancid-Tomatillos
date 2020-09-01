@@ -29,7 +29,6 @@ describe.only('Poster Component', () => {
 
     expect(rating).toBeInTheDocument()
     expect(image).toBeInTheDocument()
-
   });
 
   it('should fire a function when the image or rating is clicked', () => {
@@ -47,7 +46,6 @@ describe.only('Poster Component', () => {
     fireEvent.click(rating);
 
     expect(mockSetMovieView).toBeCalledTimes(1);
-
   });
 
   it('should render as a single figure', () => {
@@ -60,6 +58,5 @@ describe.only('Poster Component', () => {
     const moviePoster = screen.getByRole('figure')
 
     expect(moviePoster).toBeInTheDocument()
-
   });
 })
