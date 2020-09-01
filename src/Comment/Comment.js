@@ -4,8 +4,8 @@ import './Comment.css'
 const Comment = (props) => {
   return (
     <section className="comment">
-      <p>{props.comment.author}</p>
-      <p>{props.comment.comment}</p>
+      <p class="comment-author">{props.comment.author}</p>
+      <p class="comment-content">{props.comment.comment}</p>
     </section>
   )
 }
