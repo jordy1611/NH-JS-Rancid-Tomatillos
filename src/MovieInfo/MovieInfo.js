@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router-dom';
 import dataFetcher from '../dataFetcher';
+import Comments from '../Comments/Comments';
 import './MovieInfo.css';
 
 class MovieInfo extends Component {
@@ -10,7 +10,9 @@ class MovieInfo extends Component {
       movie: props.movie,
       isRated: props.isRated,
       userRating: 0,
-      isCurrentUser: props.isCurrentUser
+      isCurrentUser: props.isCurrentUser,
+      comments: [],
+      commentInput: ''
     }
   }
 
@@ -22,15 +24,18 @@ class MovieInfo extends Component {
     e.target.value = ''
   }
 
+  updateText = (e) => {
+    this.setState({ commentInput: e.target.value });
+  }
+
   createRating = (e) => {
     this.setState({userRating: parseInt(e.target.value)})
   }
 
   rateMovie = (props) => {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
-      console.log(this.state.rated)
       this.props.submitRating(this.state.userRating)
-      this.setState( {isRated: true })
+      this.setState({ isRated: true })
     } else {
       console.log('whoops')
     }
@@ -38,17 +43,33 @@ class MovieInfo extends Component {
 
   deleteRating = () => {
     this.props.deleteRating()
-    this.setState( {isRated: false} )
+    this.setState({ isRated: false })
     this.props.displayUserRatings()
+  }
+
+  postComment = async () => {
+    const commentToPost = {
+      comment: this.state.commentInput,
+      author: this.props.currentUser.name,
+      movieId: this.props.movieId,
+      id: Date.now()
+    }
+
+    await dataFetcher.submitComment(commentToPost);
+    const comments = await dataFetcher.getAllComments(this.props.movieId);
+    this.setState({ comments: comments, commentInput: '' });
+    document.getElementById('comment-form').reset();
   }
 
   componentDidMount = async () => {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
-    this.setState({movie: movieData, isRated: this.props.isRated});
+    const comments = await dataFetcher.getAllComments(this.props.movieId);
+
+    this.setState({movie: movieData, isRated: this.state.isRated, comments: comments});
   }
 
   render() {
-    if (this.state.movie) {
+    if (this.state.movie && this.state.comments) {
       return (
         <article className="movie-info">
           <img src={this.state.movie.backdrop_path} alt={`${this.state.movie.title} backdrop`}></img>
@@ -86,6 +107,14 @@ class MovieInfo extends Component {
           {this.state.isCurrentUser && this.state.isRated &&
             <button onClick={this.deleteRating}>Delete</button>
           }
+          <Comments 
+            comments={this.state.comments}
+            isCurrentUser={this.state.isCurrentUser}
+            movieId={this.props.movieId}
+            currentUser={this.props.currentUser}
+            postComment={this.postComment}
+            updateText={this.updateText}
+          />
         </article>
       )
     } else {

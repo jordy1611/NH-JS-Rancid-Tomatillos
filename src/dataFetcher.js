@@ -52,6 +52,25 @@ const dataFetcher = {
     })
     .then(() => console.log('Successful rating deletion'))
     .catch((error) => console.error(error))
+  },
+
+  getAllComments(movieId) {
+    return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
+      .then(response => response.json())
+      .then(data => data.comments)
+      .catch(error => console.error(error));
+  },
+
+  submitComment(commentToPost) {
+    return fetch(`http://localhost:3001/api/v1/movies/${commentToPost.movieId}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commentToPost),
+    }).then(response => response.json())
+      .then(data => console.log('Successful post'))
+      .catch(error => console.error(error))
   }
 }
 

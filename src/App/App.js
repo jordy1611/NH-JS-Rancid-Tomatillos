@@ -129,6 +129,7 @@ class App extends Component {
               deleteRating={this.deleteRating}
               displayUserRatings={this.displayUserRatings}
               movieId={match.params.movieId}
+              currentUser={this.state.currentUser}
             />}
           }/>
         </main>

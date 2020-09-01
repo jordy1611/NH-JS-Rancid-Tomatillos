@@ -1,0 +1,20 @@
+.comment {
+  background: rgba(0, 0, 0, .6);
+  display: flex;
+  margin: 1em 0;
+}
+
+.comment-author .comment-content {
+  size: .9em;
+}
+
+.comment-author {
+  margin: .3em;
+}
+
+.comment-content {
+  position: relative;
+  left: -1em;
+  margin: 3em auto;
+  size: .9em;
+}
