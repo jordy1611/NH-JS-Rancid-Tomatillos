@@ -10,20 +10,7 @@ class Comments extends Component {
     }
   }
 
-  updateText = (e) => {
-    this.setState({comment: e.target.value});
-  }
-
-  postReview = async () => {
-    const commentToPost = {
-      comment: this.state.comment,
-      author: this.props.currentUser.name,
-      movieId: this.props.movie.id,
-      id: Date.now()
-    }
-
-    await dataFetcher.submitComment(commentToPost);
-  }
+  
 
   render() {
     return (
@@ -39,8 +26,8 @@ class Comments extends Component {
           <form>
             <fieldset>
               <legend>Submit a comment</legend>
-              <input id="comment" type="text" placeholder="Thoughts on the movie?" onChange={this.updateText} />
-              <button type="button" onClick={this.postReview}>Submit your comment</button>
+              <input id="comment" type="text" placeholder="Thoughts on the movie?" onChange={this.props.updateText} />
+              <button type="button" onClick={this.props.postReview}>Submit your comment</button>
             </fieldset>
           </form>
         )}

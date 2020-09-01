@@ -11,7 +11,8 @@ class MovieInfo extends Component {
       isRated: props.isRated,
       userRating: 0,
       isCurrentUser: props.isCurrentUser,
-      comments: []
+      comments: [],
+      commentInput: ''
     }
   }
 
@@ -23,6 +24,10 @@ class MovieInfo extends Component {
     e.target.value = ''
   }
 
+  updateText = (e) => {
+    this.setState({ commentInput: e.target.value });
+  }
+
   createRating = (e) => {
     this.setState({userRating: parseInt(e.target.value)})
   }
@@ -31,7 +36,7 @@ class MovieInfo extends Component {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
       console.log(this.state.rated)
       this.props.submitRating(this.state.userRating)
-      this.setState( {isRated: true })
+      this.setState({ isRated: true })
     } else {
       console.log('whoops')
     }
@@ -41,6 +46,19 @@ class MovieInfo extends Component {
     this.props.deleteRating()
     this.setState({ isRated: false })
     this.props.displayUserRatings()
+  }
+
+  postReview = async () => {
+    const commentToPost = {
+      comment: this.state.commentInput,
+      author: this.props.currentUser.name,
+      movieId: this.props.movieId,
+      id: Date.now()
+    }
+
+    await dataFetcher.submitComment(commentToPost);
+    const comments = await dataFetcher.getAllComments(this.props.movieId);
+    this.setState({ comments: comments });
   }
 
   componentDidMount = async () => {
@@ -92,8 +110,10 @@ class MovieInfo extends Component {
           <Comments 
             comments={this.state.comments}
             isCurrentUser={this.state.isCurrentUser}
-            movieId={this.state.movie.id}
+            movieId={this.props.movieId}
             currentUser={this.props.currentUser}
+            postReview={this.postReview}
+            updateText={this.updateText}
           />
         </article>
       )
