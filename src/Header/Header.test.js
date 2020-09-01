@@ -84,7 +84,7 @@ describe('Header', () => {
       </MemoryRouter>
     )
 
-    const logOutButton = screen.getByRole('button');
+    const logOutButton = screen.getByText('Log Out');
 
     fireEvent.click(logOutButton);
 

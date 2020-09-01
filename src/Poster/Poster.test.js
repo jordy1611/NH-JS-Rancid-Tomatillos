@@ -46,11 +46,11 @@ describe.only('Poster Component', () => {
     fireEvent.click(image);
     fireEvent.click(rating);
 
-    expect(mockSetMovieView).toBeCalledTimes(2);
+    expect(mockSetMovieView).toBeCalledTimes(1);
 
   });
 
-  it('should be returned as a single figure', () => {
+  it('should render as a single figure', () => {
     render(
       <Router>
         <Poster poster= { poster } key={poster.id} displayMovieInfoPage={jest.fn()}/>
