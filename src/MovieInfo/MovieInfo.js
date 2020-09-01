@@ -10,7 +10,7 @@ class MovieInfo extends Component {
     super(props);
     this.state = {
       movie: props.movie,
-      isRated: props.isRated(props.movieId),
+      isRated: false,
       userRating: 0,
       isCurrentUser: props.isCurrentUser,
       isFavorited: null,
@@ -69,7 +69,7 @@ class MovieInfo extends Component {
     const isFavorited = (this.props.userFavorites) ? this.props.userFavorites.includes(parseInt(this.props.movieId)) : 'no favorites'
     const comments = await dataFetcher.getAllComments(this.props.movieId);
     
-    this.setState({movie: movieData, isRated: this.props.isRated(this.props.movieId), isFavorited: isFavorited, comments: comments});
+    this.setState({movie: movieData, isRated: this.props.isRated, isFavorited: isFavorited, comments: comments});
   }
 
   toggleUserFavorite = (event) => {

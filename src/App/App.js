@@ -126,7 +126,6 @@ class App extends Component {
       return rating.movie_id === movieID
     })
     if (ratingToDelete) {
-      console.log('there is a rating to delete')
       await dataFetcher.deleteUserRating(ratingToDelete)
       this.displayUserRatings()
     }
@@ -180,7 +179,7 @@ class App extends Component {
             return <MovieInfo
               submitRating={this.submitRating}
               isCurrentUser={this.state.currentUser.id ? true : false}
-              isRated={this.isMovieRated}
+              isRated={this.isMovieRated(match.params.movieId)}
               deleteRating={this.deleteRating}
               displayUserRatings={this.displayUserRatings}
               movieId={match.params.movieId}
