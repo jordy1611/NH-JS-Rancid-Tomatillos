@@ -17,7 +17,7 @@ const Header = (props) => {
       {props.view === "home" && userDisplay && (
         <nav>
         <Link to="/favorites">
-        <button onClick={props.setFavoritesView}>My Favorites</button>
+        <button onClick={props.displayFavorites}>My Favorites</button>
         </Link>
           <Link to="/">
             <button onClick={props.logOut}>Log Out</button>
@@ -58,7 +58,7 @@ const Header = (props) => {
             <button onClick={props.logOut}>Log Out</button>
           </Link>
           <Link to="/favorites">
-            <button onClick={props.setFavoritesView}>My Favorites</button>
+            <button onClick={props.displayFavorites}>My Favorites</button>
           </Link>
         </nav>
       )}

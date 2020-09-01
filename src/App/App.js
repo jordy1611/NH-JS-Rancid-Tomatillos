@@ -18,6 +18,7 @@ class App extends Component {
       currentUser: {},
       userRatings: [],
       userFavorites: [],
+      favoriteMovies: [],
     };
   }
 
@@ -54,8 +55,18 @@ class App extends Component {
     }
   }
 
+  displayFavorites = () => {
+    const favoriteMovies = this.state.userFavorites.reduce((favPosters, favorite) => {
+      favPosters.push(this.state.posters.find(poster => poster.id === favorite.id))
+      return favPosters
+    }, [])
+    console.log(favoriteMovies)
+    this.setState({ view: 'favorites', favoriteMovies: favoriteMovies })
+  }
+
+
+
   toggleUserFavorite = async(event) => {
-    event.persist()
     console.log('id', event.target.id, typeof(event.target.id))
     try {
       const id = parseInt(event.target.id)
@@ -132,7 +143,7 @@ class App extends Component {
           <Header
             setHomeView={this.setHomeView}
             setLoginView={this.setLoginView}
-            setFavoritesView={this.setFavoritesView}
+            displayFavorites={this.displayFavorites}
             view={this.state.view}
             currentUser={this.state.currentUser}
             logOut={this.logOut}
@@ -186,7 +197,7 @@ class App extends Component {
                       </div>
             } else {
             return <Posters
-              posters={this.state.userFavorites} // favorited poster
+              posters={this.state.favoriteMovies} // favorited poster
               setMovieView={this.setMovieView}  // keep
               userRatings={this.state.userRatings} // keep
               isCurrentUser={this.isCurrentUser()}

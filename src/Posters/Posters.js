@@ -8,7 +8,7 @@ const Posters = (props) => {
 
   return (
     <article className="poster-container">
-        {posters.map(poster => {
+        { posters.map(poster => {
           const ratingMatch = props.userRatings.find(rating => {
             return rating.movie_id === poster.id
           })

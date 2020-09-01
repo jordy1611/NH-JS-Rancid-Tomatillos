@@ -60,19 +60,21 @@ const dataFetcher = {
     return data
   },
 
-  postFavoriteStatus(movieId) {
-    fetch('http://localhost:3001/api/v1/favorites', {
+  async postFavoriteStatus(movieId) {
+    const response = await fetch('http://localhost:3001/api/v1/favorites', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: {id: movieId}
     })
-    .then((response) => response.json())
-    .then((data) => {
-      return data
-    })
-    .catch((error) => console.error(error))
+    const data = await response.json()
+    return data
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   return data
+    // })
+    // .catch((error) => console.error(error))
   }
 }
 
