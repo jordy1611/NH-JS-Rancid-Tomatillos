@@ -37,13 +37,9 @@ class MovieInfo extends Component {
     }
   }
 
-  postReview = () => {
-    dataFetcher.submitReview()
-  }
-
   deleteRating = () => {
     this.props.deleteRating()
-    this.setState( {isRated: false} )
+    this.setState({ isRated: false })
     this.props.displayUserRatings()
   }
 
@@ -51,7 +47,7 @@ class MovieInfo extends Component {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
     const comments = await dataFetcher.getAllComments(this.props.movieId);
 
-    this.setState({movie: movieData, isRated: this.props.isRated, comments: comments.comments});
+    this.setState({movie: movieData, isRated: this.state.isRated, comments: comments});
   }
 
   render() {
@@ -93,7 +89,12 @@ class MovieInfo extends Component {
           {this.state.isCurrentUser && this.state.isRated &&
             <button onClick={this.deleteRating}>Delete</button>
           }
-          <Comments comments={this.state.comments} isCurrentUser={this.state.isCurrentUser}/>
+          <Comments 
+            comments={this.state.comments}
+            isCurrentUser={this.state.isCurrentUser}
+            movieId={this.state.movie.id}
+            currentUser={this.props.currentUser}
+          />
         </article>
       )
     } else {
