@@ -54,7 +54,7 @@ const dataFetcher = {
     .catch((error) => console.error(error))
   },
 
-  getFavoriteStatuses() {
+  async getFavoriteStatuses() {
     const response = await fetch('http://localhost:3001/api/v1/favorites')
     const data = await response.json()
 
@@ -73,7 +73,7 @@ const dataFetcher = {
     .then((data) => {
       return data
     })
-    .catch((error) => console.error())
+    .catch((error) => console.error(error))
 
   }
 }

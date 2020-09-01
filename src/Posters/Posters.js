@@ -13,13 +13,13 @@ const Posters = (props) => {
             return rating.movie_id === poster.id
           })
 
-          return <Link to={`/movies/${poster.id}`} key={ poster.id }>
-            <Poster
+          return <Poster
+              key={ poster.id }
               poster= { poster }
               userRating={ ratingMatch }
               setMovieView={ props.setMovieView }
             />
-          </Link>
+
         })}
     </article>
   )

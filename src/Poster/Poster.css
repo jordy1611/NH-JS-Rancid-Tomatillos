@@ -5,23 +5,47 @@
 
 .poster{
   margin-bottom: 5em;
+  /* padding-top: .2em; */
+  display: grid;
+  grid-template-areas: "a"
 }
-img {
+
+.movie-poster {
+  grid-area: a;
   width: 23em;
   border: solid black .6em;
   border-radius: .3em;
+  margin-top: -1.5em;
+}
+
+.rating-star {
+  width: 1.5em;
+  align-self: end;
 }
 
 figcaption {
-  background-color: black;
-  border-radius: .2em;
-  color: white;
-  font-size: 2em;
-  font-weight: bold;
-  position: absolute;
-  max-height: 3em;
+  z-index: 1;
+  grid-area: a;
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: .2em; */
+
+  height: 1.2em;
 }
 
 figcaption > p {
+  font-size: 2em;
+  font-weight: bold;
   margin: 0;
+  background-color: black;
+  height: 1.2em;
+  width: auto;
+  border-radius: .2em;
+  color: white;
+  text-decoration: none;
+}
+
+figcaption > img {
+  min-width: 2.75em;
+  margin: .5em .6em 0 0;
 }
