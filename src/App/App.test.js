@@ -2,7 +2,7 @@ import MutationObserver from '@sheerun/mutationobserver-shim';
 window.MutationObserver = MutationObserver;
 import React from 'react';
 import App from './App';
-import { MemoryRouter, Link, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import sampleData from '../sampleData.js';
 import { screen, fireEvent, render, waitFor } from '@testing-library/react';
 import dataFetcher from '../dataFetcher.js';
