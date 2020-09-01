@@ -53,3 +53,21 @@ fieldset > button {
   margin: 0;
   margin-left: 4em;
 }
+
+.movie-info-favoriting {
+  display: flex;
+  align-self: center;
+  margin-top: 3em;
+  margin: 3em 40% 0 30%;
+}
+
+.movie-info-favoriting > h1 {
+  font-size: 2em;
+}
+
+.movie-info-favoriting > img {
+  width: 4em;
+  height: 4em;
+  position: absolute;
+  margin-left: 25%
+}
