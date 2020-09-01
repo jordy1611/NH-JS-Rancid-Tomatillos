@@ -34,7 +34,6 @@ class MovieInfo extends Component {
 
   rateMovie = (props) => {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
-      console.log(this.state.rated)
       this.props.submitRating(this.state.userRating)
       this.setState({ isRated: true })
     } else {
@@ -58,7 +57,7 @@ class MovieInfo extends Component {
 
     await dataFetcher.submitComment(commentToPost);
     const comments = await dataFetcher.getAllComments(this.props.movieId);
-    this.setState({ comments: comments });
+    this.setState({ comments: comments, commentInput: '' });
   }
 
   componentDidMount = async () => {
