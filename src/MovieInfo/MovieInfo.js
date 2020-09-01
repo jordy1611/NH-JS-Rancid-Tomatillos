@@ -114,7 +114,7 @@ class MovieInfo extends Component {
                 </fieldset>
               </form>
             }
-          {this.state.isCurrentUser && this.state.isRated && !
+          {this.state.isCurrentUser && this.state.isRated && 
             <button onClick={this.deleteRating}>Delete</button>
           }
           {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser && !this.state.isFavorited &&
