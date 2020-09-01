@@ -57,11 +57,13 @@ class App extends Component {
   }
 
   filterFavorites = () => {
+    if (this.state.userFavorites !== null) {
     const favoriteMovies = this.state.posters.filter(poster => {
       return this.state.userFavorites.includes(poster.id)
     })
     this.setState({ favoriteMovies: [] })
     this.setState({ favoriteMovies: favoriteMovies }, () => {})
+  }
   }
 
 
@@ -187,7 +189,9 @@ class App extends Component {
             />}
           }/>
           <Route exact path='/favorites' render={() => {
-            if (this.state.userFavorites.length === 0) {
+            if (this.state.userFavorites === null) {
+              return <h1>NO SERVER TO ACCESS FAVORITES</h1>
+            } else if (this.state.userFavorites.length === 0) {
               return <div className='no-favorites-display'>
                         <h1>There's No Favorite Movies!</h1>
                         <h1>Please Favorite Movies</h1>
@@ -199,7 +203,7 @@ class App extends Component {
                           </button>
                         </Link>
                       </div>
-            } else {
+            }  else {
             return <Posters
               posters={this.state.favoriteMovies}
               setMovieView={this.setMovieView}
