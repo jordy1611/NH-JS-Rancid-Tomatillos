@@ -2,7 +2,7 @@ import MutationObserver from '@sheerun/mutationobserver-shim';
 window.MutationObserver = MutationObserver;
 import React from 'react';
 import App from './App';
-import { BrowserRouter as Router, MemoryRouter, Link, Route } from 'react-router-dom';
+import { MemoryRouter, Link, Route } from 'react-router-dom';
 import sampleData from '../sampleData.js';
 import { screen, fireEvent, render, waitFor } from '@testing-library/react';
 import dataFetcher from '../dataFetcher.js';
@@ -13,7 +13,11 @@ describe('App', () => {
   it('should display all movies when the page loads', async () => {
     dataFetcher.getAllMovies.mockResolvedValueOnce(sampleData.movies);
 
-    render(<App />);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
 
     const movie1 = await waitFor(() => screen.getByAltText('Greenland'));
     const movie2 = await waitFor(() => screen.getByAltText('Archive'));
