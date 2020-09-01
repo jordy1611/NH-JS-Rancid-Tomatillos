@@ -46,10 +46,15 @@ class MovieInfo extends Component {
 
   componentDidMount = async () => {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
-    const isFavorited = (this.props.userFavorites) ? this.props.userFavorites.some(userFavorite => userFavorite.id === parseInt(this.props.movieId)) : 'no favorites'
-    const areFavorites = isFavorited !== 'no favorites'
+    const isFavorited = (this.props.userFavorites) ? this.props.userFavorites.includes(parseInt(this.props.movieId)) : 'no favorites'
     console.log('is favorited', isFavorited)
     this.setState({movie: movieData, isRated: this.props.isRated(this.props.movieId), isFavorited: isFavorited});
+  }
+
+  toggleUserFavorite = (event) => {
+    this.props.toggleUserFavorite(event)
+    const favoriteStatus = this.state.isFavorited
+    this.setState( {isFavorited: !this.state.isFavorited})
   }
 
   render() {
@@ -92,10 +97,10 @@ class MovieInfo extends Component {
             <button onClick={this.deleteRating}>Delete</button>
           }
           {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser && !this.state.isFavorited &&
-            <div className="movie-info-favoriting"><h1>Favorite</h1><img src={notFavorite}/></div>
+            <div className="movie-info-favoriting"><h1>Favorite</h1><img src={notFavorite} id={this.props.movieId} onClick={this.toggleUserFavorite} /></div>
           }
           {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser && this.state.isFavorited &&
-            <div className="movie-info-favoriting"><h1>Un-Favorite</h1><img src={favorite}/></div>
+            <div className="movie-info-favoriting"><h1>Un-Favorite</h1><img src={favorite} id={this.props.movieId} onClick={this.toggleUserFavorite} /></div>
           }
         </article>
       )
