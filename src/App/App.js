@@ -45,12 +45,24 @@ class App extends Component {
   getUserFavorites = async() => {
     try {
       const userFavorites = await dataFetcher.getFavoriteStatuses()
-      this.setState({ userFavorite: userFavorites })
+      this.setState({ userFavorites: userFavorites })
     } catch (error) {
       if(error) {
         console.log('no local server for user favorites available')
         this.setState( { userFavorites: null })
       }
+    }
+  }
+
+  toggleUserFavorite = async(event) => {
+    event.persist()
+    console.log('id', event.target.id, typeof(event.target.id))
+    try {
+      const id = parseInt(event.target.id)
+      await dataFetcher.postFavoriteStatus(id)
+      await this.getUserFavorites(id)
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -91,8 +103,6 @@ class App extends Component {
   isMovieRated = (movieId) => {
     if(this.state.userRatings.length > 0) {
       const movieID = parseInt(movieId)
-      // const testRating = this.state.userRatings.find(rating => rating.movie_id === movieID)
-      // console.log('testRating', testRating)
       return this.state.userRatings.some(rating => {
         return rating.movie_id === movieID
       })
@@ -134,6 +144,7 @@ class App extends Component {
               userRatings={this.state.userRatings}
               isCurrentUser={this.isCurrentUser()}
               userFavorites={this.state.userFavorites}
+              toggleUserFavorite={this.toggleUserFavorite}
             />}
           }/>
           <Route exact path='/login' render={() => {
@@ -180,6 +191,7 @@ class App extends Component {
               userRatings={this.state.userRatings} // keep
               isCurrentUser={this.isCurrentUser()}
               userFavorites={this.state.userFavorites}
+              toggleUserFavorite={this.toggleUserFavorite}
             />}}
           }/>
         </main>

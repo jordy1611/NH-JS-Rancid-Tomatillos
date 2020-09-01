@@ -13,15 +13,16 @@ const Posters = (props) => {
             return rating.movie_id === poster.id
           })
           const isFavorite = props.userFavorites ? props.userFavorites.some(userFavorite => {
-            return userFavorite.movieId === poster.id
-          }) : false
+            return userFavorite.id === poster.id
+          }) : null
           return <Poster
               key={ poster.id }
               poster= { poster }
               userRating={ ratingMatch }
               setMovieView={ props.setMovieView }
               isCurrentUser={ props.isCurrentUser }
-              isFavorited={ isFavorite }
+              isFavorite={ isFavorite }
+              toggleUserFavorite={ props.toggleUserFavorite }
             />
         })}
     </article>
