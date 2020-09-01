@@ -180,6 +180,7 @@ class App extends Component {
               deleteRating={this.deleteRating}
               displayUserRatings={this.displayUserRatings}
               movieId={match.params.movieId}
+              userFavorites={this.state.userFavorites}
             />}
           }/>
           <Route exact path='/favorites' render={() => {

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import { withRouter } from 'react-router-dom';
 import dataFetcher from '../dataFetcher';
 import './MovieInfo.css';
+import notFavorite from '../assets/notFavorite.png'
+import favorite from '../assets/favorite.png'
 
 class MovieInfo extends Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class MovieInfo extends Component {
       movie: props.movie,
       isRated: props.isRated(props.movieId),
       userRating: 0,
-      isCurrentUser: props.isCurrentUser
+      isCurrentUser: props.isCurrentUser,
+      isFavorited: null
     }
   }
 
@@ -43,7 +46,10 @@ class MovieInfo extends Component {
 
   componentDidMount = async () => {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
-    this.setState({movie: movieData, isRated: this.props.isRated(this.props.movieId)});
+    const isFavorited = (this.props.userFavorites) ? this.props.userFavorites.some(userFavorite => userFavorite.id === parseInt(this.props.movieId)) : 'no favorites'
+    const areFavorites = isFavorited !== 'no favorites'
+    console.log('is favorited', isFavorited)
+    this.setState({movie: movieData, isRated: this.props.isRated(this.props.movieId), isFavorited: isFavorited});
   }
 
   render() {
@@ -84,6 +90,9 @@ class MovieInfo extends Component {
             }
           {this.state.isCurrentUser && this.state.isRated &&
             <button onClick={this.deleteRating}>Delete</button>
+          }
+          {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser &&
+            <div className="movie-info-favoriting"><h1>Favorite</h1><img src={notFavorite}/></div>
           }
         </article>
       )
