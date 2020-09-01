@@ -8,18 +8,23 @@ const Posters = (props) => {
 
   return (
     <article className="poster-container">
-        {posters.map(poster => {
+        { posters.map(poster => {
           const ratingMatch = props.userRatings.find(rating => {
             return rating.movie_id === poster.id
           })
-
-          return <Link to={`/movies/${poster.id}`} key={ poster.id } id={ poster.id }>
-            <Poster
+  
+          const isFavorite = props.userFavorites ? props.userFavorites.includes(poster.id) : null
+          return <Poster
+              key={ poster.id }
               poster= { poster }
               userRating={ ratingMatch }
               setMovieView={ props.setMovieView }
+              setFavoritesView={ props.setFavoritesView }
+              isCurrentUser={ props.isCurrentUser }
+              isFavorite={ isFavorite }
+              toggleUserFavorite={ props.toggleUserFavorite }
+              filterFavorites={ props.filterFavorites }
             />
-          </Link>
         })}
     </article>
   )

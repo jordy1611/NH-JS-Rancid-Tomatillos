@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import dataFetcher from '../dataFetcher';
 import Comments from '../Comments/Comments';
 import './MovieInfo.css';
+import notFavorite from '../assets/notFavorite.png'
+import favorite from '../assets/favorite.png'
 
 class MovieInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       movie: props.movie,
-      isRated: props.isRated,
+      isRated: props.isRated(props.movieId),
       userRating: 0,
       isCurrentUser: props.isCurrentUser,
+      isFavorited: null,
       comments: [],
       commentInput: ''
     }
@@ -32,18 +35,18 @@ class MovieInfo extends Component {
     this.setState({userRating: parseInt(e.target.value)})
   }
 
-  rateMovie = (props) => {
+  rateMovie = () => {
     if(this.state.userRating > 0 && this.state.isCurrentUser) {
-      this.props.submitRating(this.state.userRating)
-      this.setState({ isRated: true })
+      this.setState( {isRated: true })
+      this.props.submitRating(this.state.userRating, this.props.movieId)
     } else {
-      console.log('whoops')
+      console.log('sorry must be logged in to submit a rating')
     }
   }
 
   deleteRating = () => {
-    this.props.deleteRating()
-    this.setState({ isRated: false })
+    this.props.deleteRating(this.props.movieId)
+    this.setState( {isRated: false} )
     this.props.displayUserRatings()
   }
 
@@ -63,9 +66,16 @@ class MovieInfo extends Component {
 
   componentDidMount = async () => {
     const movieData = await dataFetcher.getMovieById(this.props.movieId);
+    const isFavorited = (this.props.userFavorites) ? this.props.userFavorites.includes(parseInt(this.props.movieId)) : 'no favorites'
     const comments = await dataFetcher.getAllComments(this.props.movieId);
+    
+    this.setState({movie: movieData, isRated: this.props.isRated(this.props.movieId), isFavorited: isFavorited, comments: comments});
+  }
 
-    this.setState({movie: movieData, isRated: this.state.isRated, comments: comments});
+  toggleUserFavorite = (event) => {
+    this.props.toggleUserFavorite(event)
+    const favoriteStatus = this.state.isFavorited
+    this.setState( {isFavorited: !this.state.isFavorited})
   }
 
   render() {
@@ -104,8 +114,14 @@ class MovieInfo extends Component {
                 </fieldset>
               </form>
             }
-          {this.state.isCurrentUser && this.state.isRated &&
+          {this.state.isCurrentUser && this.state.isRated && !
             <button onClick={this.deleteRating}>Delete</button>
+          }
+          {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser && !this.state.isFavorited &&
+            <div className="movie-info-favoriting"><h1>Favorite</h1><img src={notFavorite} id={this.props.movieId} onClick={this.toggleUserFavorite} /></div>
+          }
+          {this.state.isFavorited !== 'no favorites' && this.state.isCurrentUser && this.state.isFavorited &&
+            <div className="movie-info-favoriting"><h1>Un-Favorite</h1><img src={favorite} id={this.props.movieId} onClick={this.toggleUserFavorite} /></div>
           }
           <Comments 
             comments={this.state.comments}

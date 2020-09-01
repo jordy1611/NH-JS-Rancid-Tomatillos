@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
 import Posters from '../Posters/Posters.js';
 import Header from '../Header/Header.js';
 import Login from '../Login/Login.js';
 import MovieInfo from '../MovieInfo/MovieInfo.js';
 import dataFetcher from '../dataFetcher';
 import './App.css';
+import sampleData from '../sampleData'
+import notFavorite from '../assets/notFavorite.png'
 
 class App extends Component {
   constructor() {
@@ -15,7 +17,9 @@ class App extends Component {
       view: 'home',
       movieInfo: {},
       currentUser: {},
-      userRatings: []
+      userRatings: [],
+      userFavorites: [],
+      favoriteMovies: [],
     };
   }
 
@@ -36,9 +40,48 @@ class App extends Component {
     this.setState({view: 'movie' });
   }
 
-  submitRating = async (userRating) => {
-    const rating = {user_id: this.state.currentUser.id, movie_id: this.state.movieInfo.id, rating: userRating || this.state.movieInfo.average_rating}
+  setFavoritesView = () => {
+    this.setState({ view: 'favorites'})
+  }
+
+  getUserFavorites = async() => {
+    try {
+      const userFavorites = await dataFetcher.getFavoriteStatuses()
+      this.setState({ userFavorites: userFavorites })
+    } catch (error) {
+      if(error) {
+        console.log('no local server for user favorites available')
+        this.setState( { userFavorites: null })
+      }
+    }
+  }
+
+  filterFavorites = () => {
+    if (this.state.userFavorites !== null) {
+    const favoriteMovies = this.state.posters.filter(poster => {
+      return this.state.userFavorites.includes(poster.id)
+    })
+    this.setState({ favoriteMovies: [] })
+    this.setState({ favoriteMovies: favoriteMovies }, () => {})
+  }
+  }
+
+
+  toggleUserFavorite = async(event) => {
+    try {
+      const id = parseInt(event.target.id)
+      await dataFetcher.postFavoriteStatus(id)
+      await this.getUserFavorites(id)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  submitRating = async (userRating, movieId) => {
+    const rating = {user_id: this.state.currentUser.id, movie_id: movieId, rating: userRating || this.state.movieInfo.average_rating}
+    console.log(rating)
     await dataFetcher.submitUserRating(rating);
+    const movieInfo = await dataFetcher.getMovieById(movieId)
     this.displayUserRatings();
   }
 
@@ -68,19 +111,22 @@ class App extends Component {
     }
   }
 
-  isMovieRated = () => {
+  isMovieRated = (movieId) => {
     if(this.state.userRatings.length > 0) {
+      const movieID = parseInt(movieId)
       return this.state.userRatings.some(rating => {
-        return rating.movie_id === this.state.movieInfo.id
+        return rating.movie_id === movieID
       })
     }
   }
 
-  deleteRating = async () => {
+  deleteRating = async (movieId) => {
+    const movieID = parseInt(movieId)
     const ratingToDelete = this.state.userRatings.find(rating => {
-      return rating.movie_id === this.state.movieInfo.id
+      return rating.movie_id === movieID
     })
     if (ratingToDelete) {
+      console.log('there is a rating to delete')
       await dataFetcher.deleteUserRating(ratingToDelete)
       this.displayUserRatings()
     }
@@ -97,6 +143,8 @@ class App extends Component {
           <Header
             setHomeView={this.setHomeView}
             setLoginView={this.setLoginView}
+            setFavoritesView={this.setFavoritesView}
+            filterFavorites={this.filterFavorites}
             view={this.state.view}
             currentUser={this.state.currentUser}
             logOut={this.logOut}
@@ -105,7 +153,13 @@ class App extends Component {
             return <Posters
               posters={this.state.posters}
               setMovieView={this.setMovieView}
+              setFavoritesView={this.setFavoritesView}
               userRatings={this.state.userRatings}
+              isCurrentUser={this.isCurrentUser()}
+              userFavorites={this.state.userFavorites}
+              toggleUserFavorite={this.toggleUserFavorite}
+              view={this.state.view}
+              filterFavorites={this.filterFavorites}
             />}
           }/>
           <Route exact path='/login' render={() => {
@@ -116,6 +170,7 @@ class App extends Component {
               setHomeView={this.setHomeView}
               updateCurrentUser={this.updateCurrentUser}
               displayUserRatings={this.displayUserRatings}
+              getUserFavorites={this.getUserFavorites}
             />}
           }/>
           <Route path='/movies/:movieId' render={({ match }) => {
@@ -125,12 +180,41 @@ class App extends Component {
             return <MovieInfo
               submitRating={this.submitRating}
               isCurrentUser={this.state.currentUser.id ? true : false}
-              isRated={this.isMovieRated()}
+              isRated={this.isMovieRated}
               deleteRating={this.deleteRating}
               displayUserRatings={this.displayUserRatings}
               movieId={match.params.movieId}
+              userFavorites={this.state.userFavorites}
+              toggleUserFavorite={this.toggleUserFavorite}
               currentUser={this.state.currentUser}
             />}
+          }/>
+          <Route exact path='/favorites' render={() => {
+            if (this.state.userFavorites === null) {
+              return <h1>NO SERVER TO ACCESS FAVORITES</h1>
+            } else if (this.state.userFavorites.length === 0) {
+              return <div className='no-favorites-display'>
+                        <h1>There's No Favorite Movies!</h1>
+                        <h1>Please Favorite Movies</h1>
+                        <h1>By Clicking The <img className="no-favorites-icon" src={notFavorite}/> Icon</h1>
+                        <h1>To View Them On This Page</h1>
+                        <Link to='/'>
+                          <button className='no-favorites-button' onClick={this.setHomeView}>
+                            Home
+                          </button>
+                        </Link>
+                      </div>
+            }  else {
+            return <Posters
+              posters={this.state.favoriteMovies}
+              setMovieView={this.setMovieView}
+              userRatings={this.state.userRatings}
+              isCurrentUser={this.isCurrentUser()}
+              userFavorites={this.state.userFavorites}
+              toggleUserFavorite={this.toggleUserFavorite}
+              filterFavorites={this.filterFavorites}
+              view={this.state.view}
+            />}}
           }/>
         </main>
       </Router>

@@ -54,6 +54,24 @@ const dataFetcher = {
     .catch((error) => console.error(error))
   },
 
+  async getFavoriteStatuses() {
+    const response = await fetch('http://localhost:3001/api/v1/favorites')
+    const data = await response.json()
+    return data
+  },
+
+  async postFavoriteStatus(movieId) {
+    const response = await fetch('http://localhost:3001/api/v1/favorites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id: movieId})
+    })
+    const data = await response.json()
+    return data
+  },
+    
   getAllComments(movieId) {
     return fetch(`http://localhost:3001/api/v1/movies/${movieId}/comments`)
       .then(response => response.json())
