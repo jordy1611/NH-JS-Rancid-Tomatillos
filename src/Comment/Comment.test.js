@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 jest.mock('../dataFetcher.js');
 
 describe('Comment', () => {
-  it('should render without crashing', () => {
+  it('should render and show the comment and comment author', () => {
     const comment = {
       comment: 'SO GOOD',
       author: 'AHHHH',
