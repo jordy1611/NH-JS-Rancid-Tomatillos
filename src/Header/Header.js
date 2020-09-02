@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import './Header.css';
 
 const Header = (props) => {
-  const userAttributes = Object.values(props.currentUser).length
-  const userDisplay = props.currentUser.email;
+  const userDisplay = props.currentUser.name;
 
   return (
     <header>
@@ -62,7 +61,7 @@ const Header = (props) => {
           </Link>
         </nav>
       )}
-      {userAttributes > 0 && <p>{userDisplay}</p>}
+      {userDisplay && <p>{props.currentUser.email}</p>}
     </header>
   );
 }

@@ -11,7 +11,7 @@ describe('Header', () => {
       <MemoryRouter>
         <Header
           view={'home'}
-          currentUser={{email: 'hello123@yahoo.com'}}
+          currentUser={{name: 'Beauex', email: 'hello123@yahoo.com'}}
         />
       </MemoryRouter>
     )
@@ -31,7 +31,7 @@ describe('Header', () => {
       </MemoryRouter>
     )
 
-    const loginButton = screen.getByRole('button');
+    const loginButton = screen.getByRole('button', {name: 'Login'});
 
     expect(loginButton).toBeInTheDocument();
   })
@@ -49,7 +49,7 @@ describe('Header', () => {
       </MemoryRouter>
     )
 
-    const loginButton = screen.getByRole('button');
+    const loginButton = screen.getByRole('button', {name: 'Login'});
 
     fireEvent.click(loginButton);
 
@@ -66,7 +66,7 @@ describe('Header', () => {
       </MemoryRouter>
     )
 
-    const logOutButton = screen.getByRole('button');
+    const logOutButton = screen.getByRole('button', {name: 'Log Out'});
 
     expect(logOutButton).toBeInTheDocument();
   })
