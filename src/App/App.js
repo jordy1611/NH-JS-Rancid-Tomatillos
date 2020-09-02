@@ -58,12 +58,12 @@ class App extends Component {
 
   filterFavorites = () => {
     if (this.state.userFavorites !== null) {
-    const favoriteMovies = this.state.posters.filter(poster => {
-      return this.state.userFavorites.includes(poster.id)
-    })
-    this.setState({ favoriteMovies: [] })
-    this.setState({ favoriteMovies: favoriteMovies }, () => {})
-  }
+      const favoriteMovies = this.state.posters.filter(poster => {
+        return this.state.userFavorites.includes(poster.id)
+      })
+      this.setState({ favoriteMovies: [] })
+      this.setState({ favoriteMovies: favoriteMovies }, () => {})
+    }
   }
 
 
@@ -79,9 +79,7 @@ class App extends Component {
 
   submitRating = async (userRating, movieId) => {
     const rating = {user_id: this.state.currentUser.id, movie_id: movieId, rating: userRating || this.state.movieInfo.average_rating}
-    console.log(rating)
     await dataFetcher.submitUserRating(rating);
-    const movieInfo = await dataFetcher.getMovieById(movieId)
     this.displayUserRatings();
   }
 
@@ -126,7 +124,6 @@ class App extends Component {
       return rating.movie_id === movieID
     })
     if (ratingToDelete) {
-      console.log('there is a rating to delete')
       await dataFetcher.deleteUserRating(ratingToDelete)
       this.displayUserRatings()
     }
@@ -180,7 +177,7 @@ class App extends Component {
             return <MovieInfo
               submitRating={this.submitRating}
               isCurrentUser={this.state.currentUser.id ? true : false}
-              isRated={this.isMovieRated}
+              isRated={this.isMovieRated(match.params.movieId)}
               deleteRating={this.deleteRating}
               displayUserRatings={this.displayUserRatings}
               movieId={match.params.movieId}
@@ -204,7 +201,7 @@ class App extends Component {
                           </button>
                         </Link>
                       </div>
-            }  else {
+            } else {
             return <Posters
               posters={this.state.favoriteMovies}
               setMovieView={this.setMovieView}

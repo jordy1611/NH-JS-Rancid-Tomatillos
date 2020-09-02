@@ -9,9 +9,9 @@ const Poster = (props) => {
   const poster = props.poster;
   const averageRating = props.poster.average_rating.toFixed(1);
   const userRating = props.userRating;
-  const rating = (userRating) ? `${averageRating}, ${userRating.rating}` : `${averageRating}`
-  // let isFavorited = props.isFavorited
-  const areFavorites = props.isFavorite !== null
+  const rating = (userRating) ? `${averageRating}, ${userRating.rating}` : `${averageRating}`;
+  const areFavorites = props.isFavorite !== null;
+
   return (
     <figure className="poster">
       <figcaption id={poster.id}>
