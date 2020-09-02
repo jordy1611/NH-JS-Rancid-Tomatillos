@@ -36,19 +36,20 @@ describe('App', () => {
     dataFetcher.getAllMovies.mockResolvedValueOnce(sampleData.movies);
     dataFetcher.getMovieById.mockResolvedValueOnce(sampleData.movie);
     dataFetcher.getAllComments.mockResolvedValueOnce([]);
-  
+
     render(
       <MemoryRouter>
         <App />
       </MemoryRouter>
     )
-  
+
     const akiraPoster = await waitFor(() => screen.getByAltText('Akira'));
-  
+
     fireEvent.click(akiraPoster);
-  
+
     const title = await waitFor(() => screen.getByText('Akira'));
-  
+
     expect(title).toBeInTheDocument();
-  })
+  });
+
 })

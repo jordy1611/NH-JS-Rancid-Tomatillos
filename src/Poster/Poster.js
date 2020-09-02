@@ -17,11 +17,11 @@ const Poster = (props) => {
       <figcaption id={poster.id}>
         <p>{rating}</p>
         {areFavorites && props.isFavorite && props.isCurrentUser &&
-          <img src={favorite} className="rating-star" onClick={(event) => {props.toggleUserFavorite(event); props.filterFavorites()}} id={poster.id}
+          <img src={favorite} alt="unfavorite-movie-button" className="rating-star" onClick={(event) => {props.toggleUserFavorite(event); props.filterFavorites()}} id={poster.id}
           />
         }
         {areFavorites && !props.isFavorite && props.isCurrentUser &&
-          <img src={notFavorite} className="rating-star" onClick={(event) => {props.toggleUserFavorite(event); props.filterFavorites()}} id={poster.id}/>
+          <img src={notFavorite} alt="favorite-movie-button" className="rating-star" onClick={(event) => {props.toggleUserFavorite(event); props.filterFavorites()}} id={poster.id}/>
         }
       </figcaption>
       <Link to={`/movies/${poster.id}`}>
