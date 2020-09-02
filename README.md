@@ -31,7 +31,7 @@ Rancid Tomatillos is a single page web application that lets the user browse thr
 ### App Demo
 
 * A user can view a list of movie posters when visiting the main page (logged in or logged out)
-![user viewing home page](/assets/homeview.gif)
+![user viewing home page](src/assets/homeview.gif)
 
 ### Credits
 
