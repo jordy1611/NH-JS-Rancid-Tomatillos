@@ -1,4 +1,4 @@
-form{
+form {
   margin-top: 5em;
   display: flex;
   justify-content: center;
@@ -12,10 +12,16 @@ form{
   color: white;
   align-self: center;
   width: 22em;
+  height: 11em;
   display: flex;
   flex-direction: column;
   border: solid black .4em;
   border-radius: .3em;
+}
+
+.login-fieldset > legend {
+  margin-top: 0;
+
 }
 
 label{
