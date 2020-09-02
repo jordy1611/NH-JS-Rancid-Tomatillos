@@ -23,10 +23,62 @@ describe.only('Poster Component', () => {
         <Poster poster={poster} key={poster.id} displayMovieInfoPage={jest.fn()} />
       </Router>
     )
-      
+
     const rating = screen.getByText('9.0')
     const image = screen.getByAltText('Greenland')
 
+    expect(rating).toBeInTheDocument()
+    expect(image).toBeInTheDocument()
+  });
+
+  it('should have the correct content when rendered when userFavorites are available', () => {
+    const ratingMatch = { movie_id: 149, rating: 10 }
+    const isFavorite = true
+    render(
+      <Router>
+        <Poster
+        poster={poster}
+        key={poster.id}
+        userRating={ ratingMatch }
+        setMovieView={ jest.fn() }
+        setFavoritesView={ jest.fn() }
+        isCurrentUser={ jest.fn() }
+        isFavorite={ isFavorite }
+        toggleUserFavorite={ jest.fn() }
+        filterFavorites={ jest.fn() } />
+      </Router>
+    )
+    const favoritedStar = screen.getByAltText('unfavorite-movie-button')
+    const rating = screen.getByText('9.0, 10')
+    const image = screen.getByAltText('Greenland')
+
+    expect(favoritedStar).toBeInTheDocument()
+    expect(rating).toBeInTheDocument()
+    expect(image).toBeInTheDocument()
+  });
+
+  it('should have the correct content when rendered when userFavorites are available', () => {
+    const ratingMatch = { movie_id: 149, rating: 10 }
+    const isFavorite = false
+    render(
+      <Router>
+        <Poster
+        poster={poster}
+        key={poster.id}
+        userRating={ ratingMatch }
+        setMovieView={ jest.fn() }
+        setFavoritesView={ jest.fn() }
+        isCurrentUser={ jest.fn() }
+        isFavorite={ isFavorite }
+        toggleUserFavorite={ jest.fn() }
+        filterFavorites={ jest.fn() } />
+      </Router>
+    )
+    const unFavoritedStar = screen.getByAltText('favorite-movie-button')
+    const rating = screen.getByText('9.0, 10')
+    const image = screen.getByAltText('Greenland')
+
+    expect(unFavoritedStar).toBeInTheDocument()
     expect(rating).toBeInTheDocument()
     expect(image).toBeInTheDocument()
   });
