@@ -35,7 +35,7 @@ describe('App', () => {
   it('should display a movie\'s information when its poster is clicked', async () => {
     dataFetcher.getAllMovies.mockResolvedValueOnce(sampleData.movies);
     dataFetcher.getMovieById.mockResolvedValueOnce(sampleData.movie);
-    dataFetcher.getAllComments.mockResolvedValueOnce([])
+    dataFetcher.getAllComments.mockResolvedValueOnce([]);
   
     render(
       <MemoryRouter>
