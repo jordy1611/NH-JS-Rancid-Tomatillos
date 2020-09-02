@@ -58,7 +58,7 @@ Rancid Tomatillos is a single page web application that lets the user browse thr
 ![user commenting](src/assets/commenting.gif)
 
 * A user can favorite and unfavorite a movie on the movie info page
-![user favoriting and unfavoriting](src/movieInfoFavorite/logout.gif)
+![user favoriting and unfavoriting](src/assets/movieInfoFavorite.gif)
 
 ### Credits
 
